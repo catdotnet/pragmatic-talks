@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PragmaticTalks.Model;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace PragmaticTalks
 {
@@ -28,6 +29,11 @@ namespace PragmaticTalks
 
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<PragmaticContext>(options => options.UseSqlServer(connection));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -48,6 +54,13 @@ namespace PragmaticTalks
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pragmatic Talks API V1");
+            });
 
             app.UseStaticFiles();
 
