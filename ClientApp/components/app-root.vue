@@ -1,8 +1,7 @@
 ﻿<template>
     <div id="app">
-        <v-app light>
-            <v-toolbar fixed>
-                <v-toolbar-side-icon @click.native.stop="drawer = !drawer" light></v-toolbar-side-icon>
+        <v-app>
+            <v-toolbar fixed dark class="primary">
                 <v-toolbar-title v-text="title"></v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-menu left>
@@ -20,6 +19,22 @@
                         </v-list-tile>
                     </v-list>
                 </v-menu>
+                <v-btn flat slot="extension" route :to="{ name: 'ranking' }">
+                    <v-icon left dark>format_list_numbered</v-icon>
+                    Ranking
+                </v-btn>
+                <v-btn flat slot="extension" route :to="{ name: 'rules' }">
+                    <v-icon left dark>format_list_bulleted</v-icon>
+                    Rules
+                </v-btn>
+                <v-btn flat slot="extension">
+                    <v-icon left dark>event</v-icon>
+                    Events
+                </v-btn>
+                <v-btn flat slot="extension" route :to="{ name: 'create' }">
+                    <v-icon left dark>add</v-icon>
+                    Create Talk
+                </v-btn>
             </v-toolbar>
             <main>
                 <v-container fluid>

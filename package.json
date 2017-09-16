@@ -3,15 +3,11 @@
   "description": "Pragmatic Talks vue client",
   "author": "Fernando Escolar",
   "scripts": {
-    "install": "webpack --config webpack.config.vendor.js",
-    "build": "webpack --config webpack.config.vendor.js && webpack",
-    "build-cli": "webpack",
-    "build-vendor": "webpack --config webpack.config.vendor.js",
-    "server": "node ./ClientApp/boot-server.js",
-    "production": "webpack --config webpack.config.vendor.js --env.prod && webpack --env.prod"
+    "install": "webpack --config webpack.config.vendor.js"
   },
   "dependencies": {},
   "devDependencies": {
+    "aspnet-webpack": "^2.0.1",
     "axios": "^0.16.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -38,6 +34,7 @@
     "vuetify": "^0.15.2",
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.2.0",
-    "webpack": "^2.2.0"
+    "webpack": "^2.2.0",
+    "webpack-hot-middleware": "^2.19.1"
   }
 }

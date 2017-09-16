@@ -53,8 +53,8 @@
                     { icon: 'access_time', iconClass: 'grey lighten-1 white--text', title: 'Unasigned...', subtitle: '0' }
                 ],
                 items2: [
-                    { icon: 'lightbulb_outline', iconClass: 'blue white--text', title: 'Lorem ipsum sit amen', subtitle: '320' },
-                    { icon: 'lightbulb_outline', iconClass: 'blue white--text', title: 'Lorem ipsum sit amen', subtitle: '300' },
+                    { icon: 'lightbulb_outline', iconClass: 'cyan white--text', title: 'Lorem ipsum sit amen', subtitle: '320' },
+                    { icon: 'lightbulb_outline', iconClass: 'cyan white--text', title: 'Lorem ipsum sit amen', subtitle: '300' },
                 ]
             }
         },
