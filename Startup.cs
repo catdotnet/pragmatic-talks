@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PragmaticTalks.Model;
 
 namespace PragmaticTalks
 {
@@ -23,6 +25,9 @@ namespace PragmaticTalks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<PragmaticContext>(options => options.UseSqlServer(connection));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
