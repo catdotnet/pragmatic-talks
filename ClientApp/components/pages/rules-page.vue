@@ -8,14 +8,7 @@
                     </v-card-title>
                     <v-card-text>
                         <ol>
-                            <li>You do not talk about FIGHT CLUB.</li>
-                            <li>You DO NOT talk about FIGHT CLUB.</li>
-                            <li>If someone says "stop" or goes limp, taps out the fight is over.</li>
-                            <li>Only two guys to a fight.</li>
-                            <li>One fight at a time.</li>
-                            <li>No shirts, no shoes.</li>
-                            <li>Fights will go on as long as they have to.</li>
-                            <li>If this is your first night at FIGHT CLUB, you HAVE to fight.</li>
+                            <li v-for="(o, index) in Array(11)" :key="index" v-locale="'rule' + ('0' + (index + 1)).slice(-2)"></li>
                         </ol>
                     </v-card-text>              
                 </v-card>

@@ -1,5 +1,5 @@
 ﻿<template>
-    <div id="create">
+    <div id="create" class="page">
         <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
                 <v-card>
@@ -38,10 +38,23 @@
                 ],
                 tags: [],
                 items: [
-                    'Programming',
-                    'Design',
-                    'Vue',
-                    'Vuetify'
+                    'front',
+                    'back',
+                    'data',
+                    'dotnet',
+                    'js',
+                    'node',
+                    'other languages',
+                    'library',
+                    'cloud',
+                    'mobile',
+                    'desktop',
+                    'infrastructure',
+                    'big data',
+                    'devops',
+                    'web',
+                    'IoT',
+                    'games'
                 ]
             }
         },
@@ -57,11 +70,8 @@
 </script>
 
 <style>
-.space{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-#create {
-  margin-top: 24px;
-}
+    .space {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 </style>

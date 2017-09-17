@@ -1,10 +1,10 @@
 ﻿<template>
-  <div id="home">
+  <div id="home" class="page">
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <v-card>
           <v-list two-line subheader>
-            <v-subheader inset>Next event</v-subheader>
+            <v-subheader inset>Next event jjj</v-subheader>
             <v-list-tile avatar v-for="item in items" v-bind:key="item.title" @click="">
               <v-list-tile-avatar>
                 <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
@@ -70,7 +70,5 @@
 </script>
 
 <style>
-#home {
-  margin-top: 24px;
-}
+
 </style>

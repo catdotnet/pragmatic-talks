@@ -21,7 +21,6 @@ namespace PragmaticTalks.Model
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Talk>().Property(t => t.Title).HasMaxLength(37);
-            modelBuilder.Entity<Talk>().HasMany(t => t.Tags);
 
             modelBuilder.Entity<TalkTag>().HasKey(tt => new { tt.TalkId, tt.TagId });
 

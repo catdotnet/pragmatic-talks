@@ -36,7 +36,7 @@ namespace PragmaticTalks
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, PragmaticContext context)
         {
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
@@ -54,6 +54,9 @@ namespace PragmaticTalks
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            context.Database.Migrate();
+            context.Database.EnsureCreated();
 
             app.UseSwagger();
 

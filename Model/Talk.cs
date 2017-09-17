@@ -11,6 +11,8 @@ namespace PragmaticTalks.Model
 
         public DateTime DateCreation { get; set; }
 
+        public bool IsSelected { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public Speaker Speaker { get; set; }
