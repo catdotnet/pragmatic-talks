@@ -11,9 +11,10 @@ using System;
 namespace PragmaticTalks.Migrations
 {
     [DbContext(typeof(PragmaticContext))]
-    partial class PragmaticContextModelSnapshot : ModelSnapshot
+    [Migration("20170918181349_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

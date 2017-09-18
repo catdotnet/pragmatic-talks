@@ -1,4 +1,4 @@
-﻿namespace PragmaticTalks.Model
+﻿namespace PragmaticTalks.Data
 {
     public class Tag
     {

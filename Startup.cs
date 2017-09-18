@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PragmaticTalks.Model;
+using PragmaticTalks.Data;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace PragmaticTalks
@@ -26,14 +27,25 @@ namespace PragmaticTalks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            
+            services.AddDbContext<PragmaticContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            var connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<PragmaticContext>(options => options.UseSqlServer(connection));
+            services.AddIdentity<Speaker, IdentityRole>()
+               .AddEntityFrameworkStores<PragmaticContext>()
+               .AddDefaultTokenProviders();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
+
+            services.AddAuthentication()
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                });
+                        
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, PragmaticContext context)
@@ -66,6 +78,8 @@ namespace PragmaticTalks
             });
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes => {
                 routes.MapRoute(

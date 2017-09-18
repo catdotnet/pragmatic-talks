@@ -2,3 +2,16 @@
     margin-top: 24px;
 }
 
+.only-mobile {
+    display: none !important;
+}
+
+@media only screen and (max-width: 599px) {
+    .not-mobile {
+        display: none;
+    }
+
+    .only-mobile {
+        display: flex !important;
+    }
+}

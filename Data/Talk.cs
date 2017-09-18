@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PragmaticTalks.Model
+namespace PragmaticTalks.Data
 {
     public class Talk
     {
@@ -14,6 +14,10 @@ namespace PragmaticTalks.Model
         public bool IsSelected { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public int? EventId { get; set; }
+
+        public Event Event { get; set; }
 
         public Speaker Speaker { get; set; }
 

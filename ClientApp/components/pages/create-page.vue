@@ -2,7 +2,7 @@
     <div id="create" class="page">
         <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-                <v-card>
+                <v-card v-if="isAuthenticated">
                     <v-card-title>
                         <span class="headline">Create new talk</span>
                     </v-card-title>
@@ -19,16 +19,26 @@
                         </v-btn>
                     </v-card-actions>
                 </v-card>
+                <v-card v-else>
+                    <v-card-title>
+                        <span class="headline">Create new talk</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-alert error value="true">
+                            <span v-locale="'can not create talks'"></span>
+                        </v-alert>
+                    </v-card-text>
+                </v-card>
             </v-flex>
         </v-layout>
     </div>
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import { mapState, mapActions } from 'vuex'
 
     export default {
-        
+
         data() {
             return {
                 title: '',
@@ -59,12 +69,21 @@
             }
         },
 
+        computed: {
+            ...mapState({
+                isLoading: state => state.isLoading,
+                isLogin: state => state.isLogin,
+                isAuthenticated: state => state.auth.isAuthenticated
+            })
+        },
+
         methods: {
-            ...mapActions(['loading'])
+            ...mapActions(['loading', 'showLogin'])
         },
 
         mounted() {
             this.loading(false)
+            if (!this.isAuthenticated) this.showLogin(true)
         }
     }
 </script>

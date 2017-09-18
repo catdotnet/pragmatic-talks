@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace PragmaticTalks.Model
+namespace PragmaticTalks.Data
 {
-    public class PragmaticContext : DbContext
+    public class PragmaticContext : IdentityDbContext<Speaker>
     {
         public PragmaticContext(DbContextOptions<PragmaticContext> options) : base(options)
         {
@@ -10,15 +11,19 @@ namespace PragmaticTalks.Model
 
         public DbSet<Talk> Talks { get; set; }
 
-        public DbSet<Speaker> Speakers { get; set; }
-
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<TalkTag> TalkTags { get; set; }
 
+        public DbSet<Event> Events { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Speaker>().ToTable("Speakers");
+
+            modelBuilder.Entity<Event>().HasMany(e => e.Talks).WithOne(t => t.Event).HasForeignKey(t => t.EventId);
 
             modelBuilder.Entity<Talk>().Property(t => t.Title).HasMaxLength(37);
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PragmaticTalks.Model;
+using PragmaticTalks.Data;
 
 namespace PragmaticTalks.Controllers
 {
@@ -24,19 +24,19 @@ namespace PragmaticTalks.Controllers
         [HttpGet]
         public IEnumerable<Speaker> GetSpeakers()
         {
-            return _context.Speakers;
+            return _context.Users;
         }
 
         // GET: api/SpeakersApi/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSpeaker([FromRoute] int id)
+        public async Task<IActionResult> GetSpeaker([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var speaker = await _context.Speakers.SingleOrDefaultAsync(m => m.Id == id);
+            var speaker = await _context.Users.SingleOrDefaultAsync(m => m.Id == id);
 
             if (speaker == null)
             {
@@ -48,7 +48,7 @@ namespace PragmaticTalks.Controllers
 
         // PUT: api/SpeakersApi/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSpeaker([FromRoute] int id, [FromBody] Speaker speaker)
+        public async Task<IActionResult> PutSpeaker([FromRoute] string id, [FromBody] Speaker speaker)
         {
             if (!ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace PragmaticTalks.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Speakers.Add(speaker);
+            _context.Users.Add(speaker);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetSpeaker", new { id = speaker.Id }, speaker);
@@ -98,28 +98,28 @@ namespace PragmaticTalks.Controllers
 
         // DELETE: api/SpeakersApi/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSpeaker([FromRoute] int id)
+        public async Task<IActionResult> DeleteSpeaker([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var speaker = await _context.Speakers.SingleOrDefaultAsync(m => m.Id == id);
+            var speaker = await _context.Users.SingleOrDefaultAsync(m => m.Id == id);
             if (speaker == null)
             {
                 return NotFound();
             }
 
-            _context.Speakers.Remove(speaker);
+            _context.Users.Remove(speaker);
             await _context.SaveChangesAsync();
 
             return Ok(speaker);
         }
 
-        private bool SpeakerExists(int id)
+        private bool SpeakerExists(string id)
         {
-            return _context.Speakers.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Id == id);
         }
     }
 }

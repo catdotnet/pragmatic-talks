@@ -1,6 +1,4 @@
-﻿import $store from '../store/store'
-import $auth from './auth'
-import $http from 'axios'
+﻿import $http from 'axios'
 
 var asPath = function(...args) {
     var paths = []
@@ -20,27 +18,22 @@ var asPath = function(...args) {
 
 export default {
     async get(path) {
-        var tokenHeader = await $auth.getTokenHeaders()
-        return $http.get(this.createPath(path), tokenHeader)
+        return $http.get(this.createPath(path))
     },
     async post(path, data) {
-        var tokenHeader = await $auth.getTokenHeaders()
-        return $http.post(this.createPath(path), data, tokenHeader)
+        return $http.post(this.createPath(path), data)
     },
     async put(path, data) {
-        var tokenHeader = await $auth.getTokenHeaders()
-        return $http.put(this.createPath(path), data, tokenHeader)
+        return $http.put(this.createPath(path), data)
     },
     async patch(path, data) {
-        var tokenHeader = await $auth.getTokenHeaders()
-        return $http.patch(this.createPath(path), tokenHeader)
+        return $http.patch(this.createPath(path))
     },
     async delete(path) {
-        var tokenHeader = await $auth.getTokenHeaders()
-        return $http.delete(this.createPath(path), tokenHeader)
+        return $http.delete(this.createPath(path))
     },
     createPath(path) {
-        let apiUrl = $store.getters.apiUrl
+        let apiUrl = '/api'
         return asPath(apiUrl, path)
     },
     asPath

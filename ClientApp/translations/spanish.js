@@ -7,6 +7,8 @@
     'Rules': 'Reglas',
     'Events': 'Eventos',
 
+    'can not create talks': 'No puedes crear charlas. Haz login antes por favor.',
+
     'rule01': 'Nadie habla sobre las PRAGMATIC TALKS.',
     'rule02': 'NADIE HABLA sobre las PRAGMATIC TALKS.',
     'rule03': 'Puedes hablar en INGLES, ESPAÑOL o CATALÁN.',

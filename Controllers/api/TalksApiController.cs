@@ -1,94 +1,47 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PragmaticTalks.Data;
+using PragmaticTalks.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PragmaticTalks.Model;
 
 namespace PragmaticTalks.Controllers
 {
     [Produces("application/json")]
     [Route("api/talks")]
-    public class TalksApiController : Controller
+    public class TalksApiController : ApiController
     {
         private readonly PragmaticContext _context;
 
-        public TalksApiController(PragmaticContext context)
+        public TalksApiController(PragmaticContext context) : base(context)
         {
             _context = context;
         }
 
-        // GET: api/TalksApi
         [HttpGet]
         public IEnumerable<Talk> GetTalks()
         {
             return _context.Talks;
         }
 
-        // GET: api/TalksApi/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetTalk([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var talk = await _context.Talks.SingleOrDefaultAsync(m => m.Id == id);
-
-            if (talk == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(talk);
-        }
-
-        // PUT: api/TalksApi/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTalk([FromRoute] int id, [FromBody] Talk talk)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != talk.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(talk).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TalkExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/TalksApi
         [HttpPost]
-        public async Task<IActionResult> PostTalk([FromBody] Talk talk)
+        public async Task<IActionResult> PostTalk([FromBody] TalkCreation request)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (CurrentUser == null) return Forbidden();
+
+            var tags = await _context.Tags.Where(t => request.Tags.Contains(t.Name)).ToListAsync();
+            if (tags.Count > 3) return BadRequest(ModelState);
+
+            var talk = new Talk
             {
-                return BadRequest(ModelState);
-            }
+                Title = request.Title,
+                DateCreation = DateTime.UtcNow,
+                Speaker = CurrentUser
+            };
+            talk.Tags = tags.Select(t => new TalkTag { Tag = t, Talk = talk }).ToList();
 
             _context.Talks.Add(talk);
             await _context.SaveChangesAsync();
@@ -100,10 +53,7 @@ namespace PragmaticTalks.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTalk([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var talk = await _context.Talks.SingleOrDefaultAsync(m => m.Id == id);
             if (talk == null)
