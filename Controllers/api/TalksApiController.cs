@@ -27,8 +27,7 @@ namespace PragmaticTalks.Controllers
             return _context.Talks.Where(t => t.IsDeleted == false && t.EventId == null).OrderBy(t => t.Speaker.TalksCounter).ThenBy(t => t.DateCreation);
         }
 
-        [HttpGet]
-        [Route("search")]
+        [HttpGet("search")]
         public async Task<IActionResult> SearchAsync(int page = 0, int pageSize = 10, string orderBy = null, string search = null, bool onlyOpened = false)
         {
             if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
@@ -84,7 +83,7 @@ namespace PragmaticTalks.Controllers
             return CreatedAtAction("GetTalk", new { id = talk.Id }, talk);
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("{id}/selected")]
         public async Task<IActionResult> MarkAsSelectedAsync([FromRoute] int id)
         {
             if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
