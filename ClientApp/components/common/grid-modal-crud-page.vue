@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <v-grid-page :loadData="load" :columns="columns" :filters="filters" :actions="actions" :sortBy="sortBy" :contextComponent="computedContextComponent"></v-grid-page>
+        <v-grid-page :loadData="load" :columns="columns" :filters="filters" :actions="computedActions" :sortBy="sortBy" :contextComponent="computedContextComponent"></v-grid-page>
         <v-delete-dialog :visible="deleteDialog.visible" :name="deleteDialog.item ? deleteDialog.item.name : ''" :action="deleteItem" @close="closeConfirmDelete"></v-delete-dialog>
         <v-form-dialog :title="editDialog.title" :visible="editDialog.visible" :fields="columns" :value="editDialog.item" :rules="editDialog.rules" :action="editItem" @close="closeEdit"></v-form-dialog>
     </div>
@@ -23,6 +23,10 @@
                 required: true,
                 type: Object
             },
+            actions: {
+                required: false,
+                type: Object
+            },
             sortBy: {
                 required: false,
                 type: String
@@ -43,11 +47,6 @@
             return {
                 filters: {
                 },
-                actions: {
-                    add: { type: 'table', icon: 'add', click: function (reloadMethod) { this.showEdit(null, reloadMethod) }, absolute: true, top: true, right: true, success: true },
-                    edit: { type: 'row', icon: 'edit', click: function (row, reloadMethod) { this.showEdit(row, reloadMethod) }, primary: true },
-                    delete: { type: 'row', icon: 'delete', click: function (row, reloadMethod) { this.confirmDelete(row, reloadMethod) }, error: true }
-                },
                 deleteDialog: {
                     item: null,
                     reloadMethod: null,
@@ -65,6 +64,18 @@
         },
 
         computed: {
+            computedActions() {
+                var actions = this.actions || {};
+
+                if (this.actions.add)
+                    actions.add = { type: 'table', icon: 'add', click: function (reloadMethod) { this.showEdit(null, reloadMethod) }, absolute: true, top: true, right: true, success: true }
+                if (this.actions.edit)
+                    actions.edit = { type: 'row', icon: 'edit', click: function (row, reloadMethod) { this.showEdit(row, reloadMethod) }, primary: true }
+                if (this.actions.delete)
+                    actions.delete = { type: 'row', icon: 'delete', click: function (row, reloadMethod) { this.confirmDelete(row, reloadMethod) }, error: true }
+
+                return actions;
+            },
             computedContextComponent() {
                 return this.contextComponent || this
             }
@@ -72,24 +83,9 @@
 
         methods: {
             load(page, rowsPerPage, filters, orderBy) {
-                var sortBy = orderBy.split(' ')[0]
-                var descending = orderBy.split(' ')[1] === 'desc'
-                var service = this.service
-                return new Promise(function (resolve, reject) {
-                    service.getAll().then(
-                        data => {
-                            var list = data.data.filter(function (item) {
-                                if (!filters.search) return true
-                                var result = false
-                                Object.keys(item).forEach(key => { if (item[key] && item[key].toString().toLowerCase().indexOf(filters.search.toLowerCase()) >= 0) result = true })
-                                return result
-                            })
-                            list = list.sort(function (a, b) {
-                                var aVal = a[sortBy], bVal = b[sortBy];
-                                return descending ? aVal > bVal ? -1 : aVal < bVal ? 1 : 0 : aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
-                            })
-                            resolve({ items: list, totalPages: 1 });
-                        },
+                return new Promise((resolve, reject) => {
+                    this.service.search(page, rowsPerPage, filters, orderBy).then(
+                        data => { resolve({ items: data.data.items, totalPages: data.data.totalPages }); },
                         error => { reject(error) })
                 })
             },

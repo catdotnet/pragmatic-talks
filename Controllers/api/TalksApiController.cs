@@ -28,7 +28,7 @@ namespace PragmaticTalks.Controllers
             {
                 Title = t.Title,
                 IsSelected = t.IsSelected,
-                Tags = t.Tags.Select(l => l.Tag.Name).ToArray()
+                Tags = t.Tags.Select(l => new TagItem { Name = l.Tag.Name, Color = l.Tag.Color }).ToArray()
             });
         }
 

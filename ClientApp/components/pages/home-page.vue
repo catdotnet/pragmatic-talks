@@ -5,23 +5,24 @@
         <v-card>
           <v-list two-line subheader>
             <v-subheader inset  v-locale="'Promoted'"></v-subheader>
-            <v-list-tile avatar v-for="item in items" v-bind:key="item.title" @click="">
+            <v-list-tile avatar v-for="item in items" :key="item.title" @click="">
               <v-list-tile-avatar>
                 <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
               </v-list-tile-avatar>
-              <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                  <div><v-chip v-for="tag in item.tags" :key="tag" class="green white--text">{{ tag }}</v-chip></div>
+                <v-list-tile-content>
+                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    <div><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></div>
+                </v-list-tile-content>
             </v-list-tile>
             <v-divider inset></v-divider>
             <v-subheader inset v-locale="'Stack'"></v-subheader>
-            <v-list-tile v-for="item in items2" v-bind:key="item.title" avatar @click="">
+            <v-list-tile v-for="item in items2" :key="item.title" avatar @click="">
               <v-list-tile-avatar>
                 <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
               </v-list-tile-avatar>
               <v-list-tile-content>
                   <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                  <div><v-chip v-for="tag in item.tags" :key="tag" class="green white--text">{{ tag }}</v-chip></div>
+                  <div><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></div>
               </v-list-tile-content>
             </v-list-tile>
           </v-list>
@@ -51,7 +52,10 @@
         },
 
         methods: {
-            ...mapActions(['loading'])
+            ...mapActions(['loading']),
+            getTagClass(tag) {
+                return tag.color + ' white--text'
+            }
         },
 
         mounted() {

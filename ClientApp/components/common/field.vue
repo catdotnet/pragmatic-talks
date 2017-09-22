@@ -4,7 +4,6 @@
         <v-select v-if="field.type === 'select'" :items="field.options" :label="field.label || field.text" :item-text="field.optionText" :item-value="field.optionValue" v-model="model" v-bind="field"></v-select>
         
         
-        <v-number v-else-if="field.type === 'money'" v-bind="field" :label="field.label || field.text" :placeholder="field.placeholder" v-model="model" :currency="'€'" :separator="'.'" :precision="2"></v-number>
         <template v-else-if="['radios', 'checkboxes'].indexOf(field.type) > -1">
             <p>{{ field.label || field.text }}</p>
             <v-layout row="row" wrap="wrap"><v-flex v-bind="{[field.width]: true}" xs12="xs12" v-for="option in field.choices" :key="field.value"><component v-model="model" hide-details="hide-details" :is="field.type == 'radios' ? 'v-radio' : 'v-checkbox'" :key="option.value" :value="option.value" :label="option.text"></component></v-flex></v-layout>
@@ -29,12 +28,8 @@
 </template>
 
 <script>
-    import VNumber from './field-number'
 
     export default {
-        components:{
-            'v-number': VNumber
-        },
         props: {
             field: {
                 type: Object,

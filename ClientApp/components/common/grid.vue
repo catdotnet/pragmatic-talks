@@ -20,9 +20,6 @@
                         <span v-else-if="column.type === 'select'">
                             {{ getSelectText(column, props.item) }}
                         </span>
-                         <span v-else-if="column.type === 'money'">
-                            <v-number v-model="props.item[column.value]" :readOnly="true" :currency="'€'" :separator="'.'" :precision="2"></v-number>
-                        </span>
                         <span v-else>
                             {{ props.item[column.value] }}
                         </span>
@@ -47,10 +44,9 @@
 
 <script>
     import vField from './field'
-    import vNumber from './field-number'
 
     export default {
-        components: { 'v-field': vField, 'v-number': vNumber },
+        components: { 'v-field': vField },
 
         props: {
             loadData: {

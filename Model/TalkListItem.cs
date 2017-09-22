@@ -6,6 +6,6 @@
 
         public bool IsSelected { get; set; }
 
-        public string[] Tags { get; set; }
+        public TagItem[] Tags { get; set; }
     }
 }

@@ -12,11 +12,10 @@
 </template>
 
 <script>
-    import vPageHeader from './page-header'
     import vGrid from './grid'
 
     export default {
-        components: { 'v-page-header': vPageHeader, 'v-grid': vGrid },
+        components: { 'v-grid': vGrid },
 
         props: {
             loadData: {

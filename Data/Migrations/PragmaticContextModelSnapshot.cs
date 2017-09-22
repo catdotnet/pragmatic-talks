@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using PragmaticTalks.Data;
 using System;
 
-namespace PragmaticTalks.Migrations
+namespace PragmaticTalks.Data.Migrations
 {
     [DbContext(typeof(PragmaticContext))]
-    [Migration("20170918181349_Initial")]
-    partial class Initial
+    partial class PragmaticContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,6 +205,8 @@ namespace PragmaticTalks.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Color");
 
                     b.Property<string>("Name");
 

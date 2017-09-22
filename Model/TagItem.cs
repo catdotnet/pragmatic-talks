@@ -1,9 +1,7 @@
-﻿namespace PragmaticTalks.Data
+﻿namespace PragmaticTalks.Model
 {
-    public class Tag
+    public class TagItem
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Color { get; set; }

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PragmaticTalks.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PragmaticTalks.Controllers.api
@@ -23,6 +25,20 @@ namespace PragmaticTalks.Controllers.api
         public IEnumerable<Tag> GetTags()
         {
             return _context.Tags.OrderBy(t => t.Name);
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchAsync(int page = 0, int pageSize = 10, string orderBy = null, string search = null)
+        {
+            if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
+
+            Expression<Func<Tag, bool>> preCondition = t => true;
+
+            Expression<Func<Tag, Tag>> selector = t => t;
+
+            var model = await _context.Tags.FindOrderedPagedProjectionAsync(page, pageSize, preCondition, search, orderBy, "title", selector);
+
+            return Ok(model);
         }
 
 

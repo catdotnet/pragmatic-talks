@@ -5,6 +5,9 @@ export default function (path) {
         getAll() {
             return $service.get(path)
         },
+        search(page, pageSize, search, orderBy) {
+            return $service.get(path + '/search?page=' + page + '&pageSize=' + pageSize + '&orderBy=' + orderBy + '&search=' + search.search)
+        },
         create(item) {
             return $service.post(path, item)
         },

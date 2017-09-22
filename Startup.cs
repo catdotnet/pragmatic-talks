@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PragmaticTalks.Data;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PragmaticTalks
 {
@@ -27,7 +29,7 @@ namespace PragmaticTalks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            
+
             services.AddDbContext<PragmaticContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<Speaker, IdentityRole>()
@@ -45,7 +47,7 @@ namespace PragmaticTalks
                     googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
                     googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
                 });
-                        
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, PragmaticContext context)
@@ -67,8 +69,7 @@ namespace PragmaticTalks
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            context.Database.Migrate();
-            context.Database.EnsureCreated();
+            TryToCreateDatabase(context);
 
             app.UseSwagger();
 
@@ -81,7 +82,8 @@ namespace PragmaticTalks
 
             app.UseAuthentication();
 
-            app.UseMvc(routes => {
+            app.UseMvc(routes =>
+            {
                 routes.MapRoute(
                     name: "Default",
                     template: "{controller=Home}/{action=Index}/{id?}"
@@ -92,6 +94,43 @@ namespace PragmaticTalks
                     defaults: new { controller = "Home", action = "Index" }
                 );
             });
+        }
+
+        private static void TryToCreateDatabase(PragmaticContext context)
+        {
+            context.Database.Migrate();
+            context.Database.EnsureCreated();
+
+            var tags = new Dictionary<string, string> {
+                    { "front", "pink" },
+                    { "back","red" },
+                    { "data","purple" },
+                    { "dotnet","deep-purple" },
+                    { "js","yellow" },
+                    { "node","green" },
+                    { "other languages","grey" },
+                    { "library","blue-grey" },
+                    { "cloud","blue" },
+                    { "mobile","cyan" },
+                    { "desktop","indigo" },
+                    { "infrastructure","amber" },
+                    { "big data","deep-orange" },
+                    { "devops","light-blue" },
+                    { "web","lime" },
+                    { "IoT","teal" },
+                    { "games", "orange" }
+            };
+
+            if (!context.Tags.Any())
+            {
+                foreach (var kv in tags)
+                {
+                    var tag = new Data.Tag { Name = kv.Key, Color = kv.Value };
+                    context.Tags.Add(tag);
+                }
+
+                context.SaveChanges();
+            }
         }
     }
 }

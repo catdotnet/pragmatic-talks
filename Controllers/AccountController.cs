@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PragmaticTalks.Data;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -78,7 +79,8 @@ namespace PragmaticTalks.Controllers
                 return RedirectToLocal();
             }
 
-            var user = new Speaker { UserName = email, Email = email, DisplayName = name };
+            var avatar = info.Principal.Claims.Where(x => x.Type == "picture").Select(x => x.Value).FirstOrDefault();
+            var user = new Speaker { UserName = email, Email = email, DisplayName = name, AvatarUrl = avatar };
             user.IsAdministrator = email == "fer.escolar@gmail.com";
 
             var result = await _userManager.CreateAsync(user);
