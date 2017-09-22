@@ -5,9 +5,6 @@ export default function (path) {
         getAll() {
             return $service.get(path)
         },
-        getOne(id) {
-            return $service.get($service.asPath(path, item.id))
-        },
         create(item) {
             return $service.post(path, item)
         },

@@ -1,21 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PragmaticTalks.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PragmaticTalks.Data;
 
 namespace PragmaticTalks.Controllers.api
 {
     [Produces("application/json")]
     [Route("api/tags")]
-    public class TagsApiController : Controller
+    public class TagsApiController : ApiController
     {
         private readonly PragmaticContext _context;
 
-        public TagsApiController(PragmaticContext context)
+        public TagsApiController(PragmaticContext context) : base(context)
         {
             _context = context;
         }
@@ -24,42 +22,18 @@ namespace PragmaticTalks.Controllers.api
         [HttpGet]
         public IEnumerable<Tag> GetTags()
         {
-            return _context.Tags;
+            return _context.Tags.OrderBy(t => t.Name);
         }
 
-        // GET: api/TagsApi/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetTag([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            var tag = await _context.Tags.SingleOrDefaultAsync(m => m.Id == id);
-
-            if (tag == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(tag);
-        }
-
-        // PUT: api/TagsApi/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTag([FromRoute] int id, [FromBody] Tag tag)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (CurrentUser == null || !!CurrentUser.IsAdministrator) return Forbidden();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (id != tag.Id) return BadRequest();
 
-            if (id != tag.Id)
-            {
-                return BadRequest();
-            }
-
+            tag.Name = tag.Name.RemoveDiacritics().ToLowerInvariant();
             _context.Entry(tag).State = EntityState.Modified;
 
             try
@@ -85,11 +59,10 @@ namespace PragmaticTalks.Controllers.api
         [HttpPost]
         public async Task<IActionResult> PostTag([FromBody] Tag tag)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (CurrentUser == null || !!CurrentUser.IsAdministrator) return Forbidden();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            tag.Name = tag.Name.RemoveDiacritics().ToLowerInvariant();
             _context.Tags.Add(tag);
             await _context.SaveChangesAsync();
 
@@ -100,10 +73,8 @@ namespace PragmaticTalks.Controllers.api
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTag([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (CurrentUser == null || !!CurrentUser.IsAdministrator) return Forbidden();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var tag = await _context.Tags.SingleOrDefaultAsync(m => m.Id == id);
             if (tag == null)

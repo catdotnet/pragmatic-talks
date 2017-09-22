@@ -5,6 +5,7 @@ using PragmaticTalks.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PragmaticTalks.Controllers
@@ -21,18 +22,48 @@ namespace PragmaticTalks.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Talk> GetTalks()
+        public IEnumerable<Talk> GetAsync()
         {
-            return _context.Talks;
+            return _context.Talks.Where(t => t.IsDeleted == false && t.EventId == null).OrderBy(t => t.Speaker.TalksCounter).ThenBy(t => t.DateCreation);
+        }
+
+        [HttpGet]
+        [Route("search")]
+        public async Task<IActionResult> SearchAsync(int page = 0, int pageSize = 10, string orderBy = null, string search = null, bool onlyOpened = false)
+        {
+            if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
+
+            Expression<Func<Talk, bool>> preCondition;
+            if (onlyOpened) preCondition = p => p.IsDeleted == false;
+            else preCondition = p => true;
+
+            Expression<Func<Talk, TalkSearchItem>> selector = t => new TalkSearchItem
+            {
+                Id = t.Id,
+                DateCreation =  t.DateCreation,
+                IsAssignedToEvent = t.EventId != null,
+                IsDeleted = t.IsDeleted,
+                IsSelected = t.IsSelected,
+                SpeakerName = t.Speaker.DisplayName,
+                Title = t.Title
+            };
+
+            var model = await _context.Talks.FindOrderedPagedProjectionAsync(page, pageSize, preCondition, search, orderBy, "title", selector);
+
+            return Ok(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostTalk([FromBody] TalkCreation request)
+        public async Task<IActionResult> CreateAsync([FromBody] TalkCreation request)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
             if (CurrentUser == null) return Forbidden();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var tags = await _context.Tags.Where(t => request.Tags.Contains(t.Name)).ToListAsync();
+            var requestedTags = request.Tags.Select(s => s.RemoveDiacritics().ToLowerInvariant()).ToArray();
+            var tags = await _context.Tags.Where(t => requestedTags.Contains(t.Name)).ToListAsync();
+            var newTags = requestedTags.Where(t => !tags.Any(i => i.Name == t)).Select(t => new Tag { Name = t });
+            tags.AddRange(newTags);
+
             if (tags.Count > 3) return BadRequest(ModelState);
 
             var talk = new Talk
@@ -44,32 +75,45 @@ namespace PragmaticTalks.Controllers
             talk.Tags = tags.Select(t => new TalkTag { Tag = t, Talk = talk }).ToList();
 
             _context.Talks.Add(talk);
+
+            CurrentUser.TalksCounter += 1;
+            _context.Entry(CurrentUser).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTalk", new { id = talk.Id }, talk);
         }
 
-        // DELETE: api/TalksApi/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTalk([FromRoute] int id)
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> MarkAsSelectedAsync([FromRoute] int id)
         {
+            if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var talk = await _context.Talks.SingleOrDefaultAsync(m => m.Id == id);
-            if (talk == null)
-            {
-                return NotFound();
-            }
+            if (talk == null) return NotFound();
 
-            _context.Talks.Remove(talk);
+
+            talk.IsSelected = true;
             await _context.SaveChangesAsync();
 
             return Ok(talk);
         }
 
-        private bool TalkExists(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
-            return _context.Talks.Any(e => e.Id == id);
+            if (CurrentUser == null) return Forbidden();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var talk = await _context.Talks.SingleOrDefaultAsync(m => m.Id == id);
+            if (talk == null) return NotFound();
+            if (talk.Speaker.Email != CurrentUser.Email && !CurrentUser.IsAdministrator) return Forbidden();
+
+            talk.IsDeleted = true;
+            await _context.SaveChangesAsync();
+
+            return Ok(talk);
         }
     }
 }

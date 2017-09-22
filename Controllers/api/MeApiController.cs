@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PragmaticTalks.Data;
 using PragmaticTalks.Model;
-using System.Threading.Tasks;
 
 namespace PragmaticTalks.Controllers
 {
@@ -17,7 +16,7 @@ namespace PragmaticTalks.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMeAsync()
+        public IActionResult GetMe()
         {
             if (CurrentUser == null) return Forbidden();
 
