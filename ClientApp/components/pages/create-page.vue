@@ -4,16 +4,16 @@
             <v-flex xs12 sm6 offset-sm3>
                 <v-card v-if="isAuthenticated">
                     <v-card-title>
-                        <span class="headline">Create new talk</span>
+                        <span class="headline" v-locale="'Create new talk'"></span>
                     </v-card-title>
                     <v-card-text>
-                        <v-text-field label="Title" v-model="title" :counter="37" :rules="titleRule" required></v-text-field>
+                        <v-text-field :label="t('Title')" v-model="title" :counter="37" :rules="titleRule" required></v-text-field>
                         <div class="space"></div>
-                        <v-select v-model="tags" label="Tags" multiple tags :items="items"></v-select>
+                        <v-select v-model="tags" :label="t('Tags')" multiple tags :items="items"></v-select>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn class="blue--text darken-1" flat @click.native="">Send</v-btn>
+                        <v-btn class="blue--text darken-1" flat @click.native="create" v-locale="'Send'"></v-btn>
                         <v-btn floating fab dark router to="/" primary absolute top right>
                             <v-icon>chevron_left</v-icon>
                         </v-btn>
@@ -21,7 +21,7 @@
                 </v-card>
                 <v-card v-else>
                     <v-card-title>
-                        <span class="headline">Create new talk</span>
+                        <span class="headline" v-locale="'Create new talk'"></span>
                     </v-card-title>
                     <v-card-text>
                         <v-alert error value="true">
@@ -36,6 +36,7 @@
 
 <script>
     import { mapState, mapActions } from 'vuex'
+    import service from '../../services/talks'
 
     export default {
 
@@ -78,9 +79,25 @@
         },
 
         methods: {
-            ...mapActions(['loading', 'showLogin'])
+            ...mapActions(['loading', 'showLogin']),
+            create() {
+                this.loading(true)
+                service.post({ title: this.title, tags: this.tags }).then(response => {
+                    this.title = ''
+                    this.tags = []
+                    this.loading(false)
+                }).catch(error => {
+                    this.loading(false)
+                })
+            }
         },
-
+        watch: {
+            isAuthenticated: {
+                handler(after, before) {
+                    if (after) this.showLogin(false)
+                }
+            }
+        },
         mounted() {
             this.loading(false)
             if (!this.isAuthenticated) this.showLogin(true)

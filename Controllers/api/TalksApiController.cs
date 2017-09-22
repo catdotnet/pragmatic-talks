@@ -22,9 +22,14 @@ namespace PragmaticTalks.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Talk> GetAsync()
+        public IEnumerable<TalkListItem> GetAsync()
         {
-            return _context.Talks.Where(t => t.IsDeleted == false && t.EventId == null).OrderBy(t => t.Speaker.TalksCounter).ThenBy(t => t.DateCreation);
+            return _context.Talks.Where(t => t.IsDeleted == false && t.EventId == null).OrderBy(t => t.Speaker.TalksCounter).ThenBy(t => t.DateCreation).Select(t => new TalkListItem
+            {
+                Title = t.Title,
+                IsSelected = t.IsSelected,
+                Tags = t.Tags.Select(l => l.Tag.Name).ToArray()
+            });
         }
 
         [HttpGet("search")]
@@ -80,7 +85,7 @@ namespace PragmaticTalks.Controllers
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTalk", new { id = talk.Id }, talk);
+            return Created(string.Empty, new { id = talk.Id });
         }
 
         [HttpPatch("{id}/selected")]

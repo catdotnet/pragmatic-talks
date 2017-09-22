@@ -7,6 +7,16 @@
     'Rules': 'Regles',
     'Events': 'Esdeveniments',
 
+    'Next event': 'Següent esdeveniment',
+    'Promoted': 'Promocionat',
+    'Stack': 'Stack',
+
+    'Create new talk': 'Crear una xerrada',
+    'Title': 'Títol',
+    'Tags': 'Etiquetes',
+    'Send': 'Envia',
+    'Can not create talks': 'No pots crear xerrades. Fes login abans si us plau. ',
+
     'rule01': 'Ningú parla sobre les Pragmatic TALKS.',
     'rule02': 'NINGÚ PARLA sobre les Pragmatic TALKS.',
     'rule03': 'Pots parlar en ANGLÈS, ESPANYOL o CATALÀ.',

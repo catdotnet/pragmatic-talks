@@ -7,7 +7,15 @@
     'Rules': 'Rules',
     'Events': 'Events',
 
-    'can not create talks': 'You can not create new talks.Make login first, please',
+    'Next event': 'Next event',
+    'Promoted': 'Promoted',
+    'Stack': 'Stack',
+
+    'Create new talk': 'Create new talk',
+    'Title': 'Title',
+    'Tags': 'Tags',
+    'Send': 'Send',
+    'can not create talks': 'Please, authenticate before creating a new talk.',
 
     'rule01': 'You do not talk about PRAGMATIC TALKS.',
     'rule02': 'You DO NOT talk about PRAGMATIC TALKS.',

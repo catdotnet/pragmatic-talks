@@ -4,7 +4,7 @@
             <v-flex xs12 sm6 offset-sm3>
                 <v-card>
                     <v-card-title>
-                        <span class="headline"  v-locale="'Rules'"></span>
+                        <span class="headline" v-locale="'Rules'"></span>
                     </v-card-title>
                     <v-card-text>
                         <ol>

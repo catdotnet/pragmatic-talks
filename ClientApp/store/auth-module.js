@@ -34,7 +34,6 @@ const mutations = {
 // ACTIONS
 const actions = {
     authenticate(context, data) {
-        debugger
         context.commit(MAIN_SET_AUTH, { isAuthenticated: true, userName: data.displayName, profile: data })
     },
 }

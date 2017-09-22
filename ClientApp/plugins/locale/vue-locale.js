@@ -31,6 +31,12 @@ export default {
                         window.location.reload(true)
                     }
                 }
+            },
+            methods: {
+                t(text) {
+                    var translation = fetch(this.$locale, text)
+                    return replace(translation, {})
+                }
             }
         })
     }

@@ -7,6 +7,14 @@
     'Rules': 'Reglas',
     'Events': 'Eventos',
 
+    'Next event': 'Siguiente evento',
+    'Promoted': 'Promovido',
+    'Stack': 'Stack',
+
+    'Create new talk': 'Crear nueva charla',
+    'Title': 'Título',
+    'Tags': 'Etiquetas',
+    'Send': 'Enviar',
     'can not create talks': 'No puedes crear charlas. Haz login antes por favor.',
 
     'rule01': 'Nadie habla sobre las PRAGMATIC TALKS.',
