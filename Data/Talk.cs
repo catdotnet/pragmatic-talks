@@ -15,6 +15,8 @@ namespace PragmaticTalks.Data
 
         public bool IsDeleted { get; set; }
 
+        public int SpeakerTalkCount { get; set; }
+
         public int? EventId { get; set; }
 
         public Event Event { get; set; }

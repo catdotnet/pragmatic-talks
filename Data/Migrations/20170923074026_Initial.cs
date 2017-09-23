@@ -197,6 +197,7 @@ namespace PragmaticTalks.Data.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     IsSelected = table.Column<bool>(type: "bit", nullable: false),
                     SpeakerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SpeakerTalkCount = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(37)", maxLength: 37, nullable: true)
                 },
                 constraints: table =>

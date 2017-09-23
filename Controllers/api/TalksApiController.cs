@@ -24,7 +24,7 @@ namespace PragmaticTalks.Controllers
         [HttpGet]
         public IEnumerable<TalkListItem> GetAsync()
         {
-            return _context.Talks.Where(t => t.IsDeleted == false && t.EventId == null).OrderBy(t => t.Speaker.TalksCounter).ThenBy(t => t.DateCreation).Select(t => new TalkListItem
+            return _context.Talks.Where(t => t.IsDeleted == false && t.EventId == null).OrderBy(t => t.SpeakerTalkCount).ThenBy(t => t.DateCreation).Select(t => new TalkListItem
             {
                 Title = t.Title,
                 IsSelected = t.IsSelected,
@@ -82,6 +82,8 @@ namespace PragmaticTalks.Controllers
 
             CurrentUser.TalksCounter += 1;
             _context.Entry(CurrentUser).State = EntityState.Modified;
+
+            talk.SpeakerTalkCount = CurrentUser.TalksCounter;
 
             await _context.SaveChangesAsync();
 

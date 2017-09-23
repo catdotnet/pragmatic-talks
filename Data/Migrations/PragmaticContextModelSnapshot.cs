@@ -230,6 +230,8 @@ namespace PragmaticTalks.Data.Migrations
 
                     b.Property<string>("SpeakerId");
 
+                    b.Property<int>("SpeakerTalkCount");
+
                     b.Property<string>("Title")
                         .HasMaxLength(37);
 

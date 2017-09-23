@@ -11,7 +11,7 @@ using System;
 namespace PragmaticTalks.Data.Migrations
 {
     [DbContext(typeof(PragmaticContext))]
-    [Migration("20170922214751_Initial")]
+    [Migration("20170923074026_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -230,6 +230,8 @@ namespace PragmaticTalks.Data.Migrations
                     b.Property<bool>("IsSelected");
 
                     b.Property<string>("SpeakerId");
+
+                    b.Property<int>("SpeakerTalkCount");
 
                     b.Property<string>("Title")
                         .HasMaxLength(37);
