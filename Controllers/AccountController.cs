@@ -2,15 +2,23 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PragmaticTalks.Data;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PragmaticTalks.Controllers
 {
     public class AccountController : Controller
     {
+        private const string GoogleApiKey = "AIzaSyCbx_yBJkDqmY5djoEK9EPrDLhbirwuSRI";
         private readonly UserManager<Speaker> _userManager;
         private readonly SignInManager<Speaker> _signInManager;
         private readonly ILogger _logger;
@@ -79,7 +87,9 @@ namespace PragmaticTalks.Controllers
                 return RedirectToLocal();
             }
 
-            var avatar = info.Principal.Claims.Where(x => x.Type == "picture").Select(x => x.Value).FirstOrDefault();
+            var twitterName = info.Principal.Claims.Where(x => x.Type == "urn:twitter:screenname").Select(x => x.Value).FirstOrDefault();
+            var userId = info.Principal.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).FirstOrDefault();
+            var avatar = string.IsNullOrEmpty(twitterName) ? await GetGooglePictureAsync(userId) : await GetTwitterPictureAsync(twitterName);
             var user = new Speaker { UserName = email, Email = email, DisplayName = name, AvatarUrl = avatar };
             user.IsAdministrator = email == "fer.escolar@gmail.com";
 
@@ -120,6 +130,48 @@ namespace PragmaticTalks.Controllers
             else
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+        }
+
+        private async Task<string> GetGooglePictureAsync(string userId)
+        {
+            var url = $"https://www.googleapis.com/plus/v1/people/{userId}?fields=image&key={GoogleApiKey}";
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+                var json = await response.Content.ReadAsStringAsync();
+                JObject result = JsonConvert.DeserializeObject<JObject>(json);
+                return result["image"]["url"].Value<string>();
+            }
+        }
+
+        private async Task<string> GetTwitterPictureAsync(string screenName)
+        {
+            var oAuthConsumerKey = "nKeG3ApWmQnyQ1WdCjwxYT3kG";
+            var oAuthConsumerSecret = "MmSjuydKuDD0o3ZcIxAcq4l2yE1n35bVnY00r4vrNaMuquHs8m";
+            var oAuthUrl = "https://api.twitter.com/oauth2/token";
+            var avatarUrl = $"https://api.twitter.com/1.1/users/show.json?screen_name={screenName}";
+
+            using (var client = new HttpClient())
+            {
+                var schema = "Basic";
+                var authHeader = Convert.ToBase64String(Encoding.UTF8.GetBytes(Uri.EscapeDataString(oAuthConsumerKey) + ":" + Uri.EscapeDataString((oAuthConsumerSecret))));
+                var content = new FormUrlEncodedContent(new Dictionary<string, string> {
+                    { "grant_type", "client_credentials" }
+                });
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(schema, authHeader);
+                var response = await client.PostAsync(oAuthUrl, content);
+                var json = await response.Content.ReadAsStringAsync();
+                var obj = JsonConvert.DeserializeObject<JObject>(json);
+
+                authHeader = obj["access_token"].Value<string>();
+                schema = obj["token_type"].Value<string>();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(schema, authHeader);
+                response = await client.GetAsync(avatarUrl);
+                json = await response.Content.ReadAsStringAsync();
+                obj = JsonConvert.DeserializeObject<JObject>(json);
+
+                return obj["profile_image_url"].Value<string>();
             }
         }
     }

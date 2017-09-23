@@ -29,13 +29,13 @@
                                 <v-layout row>
                                     <v-flex xs7>
                                         <div>
-                                            <div class="headline">Microsoft</div>
-                                            <div>Use your Microsoft account</div>
+                                            <div class="headline">Twitter</div>
+                                            <div>Use your Twitter account</div>
                                         </div>
                                     </v-flex>
                                     <v-flex xs5>
-                                        <v-btn fab dark :href="url('Google')">
-                                            <v-icon x-large right>fa-windows</v-icon>
+                                        <v-btn fab dark :href="url('Twitter')">
+                                            <v-icon x-large right>fa-twitter</v-icon>
                                         </v-btn>
                                     </v-flex>
                                 </v-layout>

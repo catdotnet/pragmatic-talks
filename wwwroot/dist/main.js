@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ed82ce1a1966161cf099"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3fb5eea91d0704ce5361"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -22388,7 +22388,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', [_c('div', {
     staticClass: "headline"
-  }, [_vm._v("Microsoft")]), _vm._v(" "), _c('div', [_vm._v("Use your Microsoft account")])])]), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("Twitter")]), _vm._v(" "), _c('div', [_vm._v("Use your Twitter account")])])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "xs5": ""
     }
@@ -22396,14 +22396,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "fab": "",
       "dark": "",
-      "href": _vm.url('Google')
+      "href": _vm.url('Twitter')
     }
   }, [_c('v-icon', {
     attrs: {
       "x-large": "",
       "right": ""
     }
-  }, [_vm._v("fa-windows")])], 1)], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-card-actions', [_c('v-spacer'), _vm._v(" "), _c('v-btn', {
+  }, [_vm._v("fa-twitter")])], 1)], 1)], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-card-actions', [_c('v-spacer'), _vm._v(" "), _c('v-btn', {
     staticClass: "red--text darken-1",
     attrs: {
       "flat": "flat"

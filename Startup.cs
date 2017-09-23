@@ -9,6 +9,8 @@ using PragmaticTalks.Data;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace PragmaticTalks
 {
@@ -46,6 +48,16 @@ namespace PragmaticTalks
                 {
                     googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
                     googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                })
+                .AddMicrosoftAccount(microsoftOptions => {
+                    microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"]; ;
+                    microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                })
+                .AddTwitter(twitterOptions => {
+                    twitterOptions.ConsumerKey = Configuration["Authentication:Twitter:ClientId"]; ;
+                    twitterOptions.ConsumerSecret = Configuration["Authentication:Twitter:ClientSecret"];
+                    twitterOptions.RetrieveUserDetails = true;
+                    twitterOptions.SaveTokens = true;
                 });
 
         }
