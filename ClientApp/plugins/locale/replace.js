@@ -6,6 +6,7 @@
       return replacements[key]
     }
 
+    console.log('Resource not found: ' + placeholder)
     return placeholder
   })
 }

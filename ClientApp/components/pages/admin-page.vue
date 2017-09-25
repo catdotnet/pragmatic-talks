@@ -1,6 +1,6 @@
 ﻿<template>
     <div id="admin">
-        <v-layout row v-if="isAuthenticated">
+        <v-layout row v-if="isAuthenticated && isAdministrator">
             <v-flex xs12>
                 <v-card>
                     
@@ -34,15 +34,17 @@
 <script>
     import { mapState, mapActions } from 'vuex'
     import Talks from './admin/talks'
+    import Events from './admin/events'
     import Tags from './admin/tags'
+    import Speakers from './admin/speakers'
 
     export default {
-        components: { 'v-talks': Talks, 'v-tags': Tags },
+        components: { 'v-talks': Talks, 'v-events': Events, 'v-tags': Tags, 'v-speakers': Speakers },
 
         data() {
             return {
                 items: ['Talks', 'Events', 'Tags', 'Speakers'],
-                components: ['v-talks', '', 'v-tags', '']
+                components: ['v-talks', 'v-events', 'v-tags', 'v-speakers']
             }
         },
 
@@ -50,7 +52,8 @@
             ...mapState({
                 isLoading: state => state.isLoading,
                 isLogin: state => state.isLogin,
-                isAuthenticated: state => state.auth.isAuthenticated
+                isAuthenticated: state => state.auth.isAuthenticated,
+                isAdministrator: state => state.auth.profile.isAdministrator
             })
         },
 

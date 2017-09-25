@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PragmaticTalks.Data;
+using PragmaticTalks.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PragmaticTalks.Controllers
@@ -18,54 +21,84 @@ namespace PragmaticTalks.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public IEnumerable<Event> GetEvents()
+        [HttpGet("next")]
+        public async Task<IActionResult> GetNextEventAsync()
         {
-            return _context.Events;
+            var @event = await _context.Events.Include("Talks.Tags.Tag").Include("Talks.Speaker").Where(e => e.Date >= DateTime.Now.Date).OrderBy(e => e.Date).FirstOrDefaultAsync();
+            if (@event == null) return NoContent();
+
+            return Ok(new EventDetail
+            {
+                Id = @event.Id,
+                Date = @event.Date,
+                Name = @event.Name,
+                Talks = @event.Talks.Select(t => t.Title),
+                Tags = @event.Talks.SelectMany(t => t.Tags).Select(tt => tt.Tag).Distinct().Select(t => new TagItem { Name = t.Name, Color = t.Color }),
+                Speakers = @event.Talks.Select(t => t.Speaker).Distinct().Select(s => new SpeakerItem { Name = s.DisplayName, AvatarUrl = s.AvatarUrl })
+            });
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetEvent([FromRoute] int id)
+        [HttpGet("last")]
+        public async Task<IActionResult> GetLastEventsAsync()
+        {
+            var events = await _context.Events.Include("Talks.Tags.Tag").Include("Talks.Speaker").Where(e => e.Date < DateTime.Now.Date).OrderByDescending(e => e.Date).Take(9).ToListAsync();
+            var model = events.Select(@event => new EventDetail
+            {
+                Id = @event.Id,
+                Date = @event.Date,
+                Name = @event.Name,
+                Talks = @event.Talks.Select(t => t.Title),
+                Tags = @event.Talks.SelectMany(t => t.Tags).Select(tt => tt.Tag).Distinct().Select(t => new TagItem { Name = t.Name, Color = t.Color }),
+                Speakers = @event.Talks.Select(t => t.Speaker).Distinct().Select(s => new SpeakerItem { Name = s.DisplayName, AvatarUrl = s.AvatarUrl })
+            });
+            return Ok(model);
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchAsync(int page = 0, int pageSize = 10, string orderBy = null, string search = null)
         {
             if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
-            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.Id == id);
+            Expression<Func<Event, bool>> preCondition = e => true;
 
-            if (@event == null)
+            Expression<Func<Event, EventSearchItem>> selector = e => new EventSearchItem
             {
-                return NotFound();
-            }
+                Id = e.Id,
+                Name = e.Name,
+                Date = e.Date,
+                Url = e.Url,
+                Talks = e.Talks.Select(t => t.Title)
+            };
 
-            return Ok(@event);
+            var model = await _context.Events.FindOrderedPagedProjectionAsync(page, pageSize, preCondition, search, orderBy, "name", selector);
+
+            return Ok(model);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent([FromRoute] int id, [FromBody] Event @event)
+        public async Task<IActionResult> PutEvent([FromRoute] int id, [FromBody] EventModification request)
         {
             if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            if (id != @event.Id) return BadRequest();
+            if (id != request.Id) return BadRequest();
 
-            _context.Entry(@event).State = EntityState.Modified;
+            var @event = await _context.Events.Include("Talks").SingleOrDefaultAsync(e => e.Id == id);
+            if (@event == null) return NotFound();
 
-            try
+            @event.Name = request.Name;
+            @event.Date = request.Date;
+            @event.Url = request.Url;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new EventSearchItem
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EventExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+                Id = @event.Id,
+                Name = @event.Name,
+                Date = @event.Date,
+                Url = @event.Url,
+                Talks = @event.Talks.Select(t => t.Title)
+            });
         }
 
         [HttpPost]
@@ -74,10 +107,23 @@ namespace PragmaticTalks.Controllers
             if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            var selectedTalks = await _context.Talks.Where(t => t.IsSelected && t.EventId == null).ToListAsync();
+            if (selectedTalks.Count != 5) return BadRequest("There are not 5 selected talks yet");
+
+            @event.Talks = selectedTalks;
+
             _context.Events.Add(@event);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
+            return Created(new EventSearchItem
+            {
+                Id = @event.Id,
+                Name = @event.Name,
+                Date = @event.Date,
+                Url = @event.Url,
+                Talks = @event.Talks.Select(t => t.Title)
+            });
         }
 
         [HttpDelete("{id}")]
@@ -86,18 +132,27 @@ namespace PragmaticTalks.Controllers
             if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.Id == id);
+            var @event = await _context.Events.Include("Talks").SingleOrDefaultAsync(m => m.Id == id);
             if (@event == null) return NotFound();
+
+            foreach (var talk in @event.Talks)
+            {
+                talk.EventId = null;
+                talk.Event = null;
+                talk.IsSelected = false;
+            }
 
             _context.Events.Remove(@event);
             await _context.SaveChangesAsync();
 
-            return Ok(@event);
-        }
-
-        private bool EventExists(int id)
-        {
-            return _context.Events.Any(e => e.Id == id);
+            return Ok(new EventSearchItem
+            {
+                Id = @event.Id,
+                Name = @event.Name,
+                Date = @event.Date,
+                Url = @event.Url,
+                Talks = new string[0]
+            });
         }
     }
 }

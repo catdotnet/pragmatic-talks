@@ -135,6 +135,8 @@ namespace PragmaticTalks.Data.Migrations
 
                     b.Property<DateTime?>("Date");
 
+                    b.Property<string>("Name");
+
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
@@ -162,6 +164,8 @@ namespace PragmaticTalks.Data.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<bool>("IsAdministrator");
+
+                    b.Property<bool>("IsBlocked");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -227,6 +231,8 @@ namespace PragmaticTalks.Data.Migrations
                     b.Property<bool>("IsDeleted");
 
                     b.Property<bool>("IsSelected");
+
+                    b.Property<string>("Language");
 
                     b.Property<string>("SpeakerId");
 
@@ -309,7 +315,7 @@ namespace PragmaticTalks.Data.Migrations
                         .HasForeignKey("EventId");
 
                     b.HasOne("PragmaticTalks.Data.Speaker", "Speaker")
-                        .WithMany()
+                        .WithMany("Talks")
                         .HasForeignKey("SpeakerId");
                 });
 

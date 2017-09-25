@@ -6,6 +6,24 @@
     display: none !important;
 }
 
+.chip {
+    font-size: 10px;
+    height: 24px;
+}
+
+.list__tile {
+    font-size: 18px;
+}
+
+.subheader--inset {
+    margin-left: 4px;
+}
+
+.divider--inset {
+    margin-left: 4px;
+    width: calc(100% - 4px);
+}
+
 @media only screen and (max-width: 599px) {
     .not-mobile {
         display: none;

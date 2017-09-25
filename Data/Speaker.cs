@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace PragmaticTalks.Data
 {
@@ -10,6 +11,10 @@ namespace PragmaticTalks.Data
 
         public bool IsAdministrator { get; set; }
 
+        public bool IsBlocked { get; set; }
+
         public int TalksCounter { get; set; }
+
+        public IEnumerable<Talk> Talks { get; set; }
     }
 }

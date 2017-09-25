@@ -13,9 +13,7 @@
                 </v-container>
             </main>
 
-            <v-footer right>
-                <span>&copy; 2017</span>
-            </v-footer>
+        
         </v-app>
 
         <v-spinner :visible="isLoading"></v-spinner>
@@ -29,6 +27,7 @@
 <script>
     import { mapState, mapActions } from 'vuex'
     import Vue from 'vue'
+    import axios from 'axios'
     import Spinner from './layout/spinner'
     import Navigation from './layout/navigation'
     import Toolbar from './layout/toolbar'
@@ -55,7 +54,7 @@
                 miniVariant: false,
                 title: 'Pragmatic Talks',
                 menuOptions: [
-                    { title: 'Talks', to: { name: 'ranking' }, icon: 'record_voice_over' },
+                    { title: 'Talks', to: { name: 'talks' }, icon: 'record_voice_over' },
                     { title: 'Rules', to: { name: 'rules' }, icon: 'format_list_numbered' },
                     { title: 'Events', to: { name: 'events' }, icon: 'event' },
                 ],
@@ -75,7 +74,7 @@
         },
 
         methods: {
-            ...mapActions(['showLogin', 'loading']),
+            ...mapActions(['showLogin', 'loading', 'error']),
             ...mapActions(['authenticate'], 'auth'),
             navigationChanged(value) {
                 this.drawer = value;
@@ -93,6 +92,13 @@
             }).catch(error => {
                 this.loading(false)
             })
+
+            axios.interceptors.response.use(null, error => {
+                if (!error.response) return Promise.reject(error)
+
+                this.error(error.response && error.response.data && error.response.data.message ? error.response.data.message : error.status + ' ' + error.message )
+                return Promise.reject(error);
+            });
         }
     }
 </script>

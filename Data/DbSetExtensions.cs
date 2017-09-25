@@ -9,7 +9,7 @@ namespace PragmaticTalks.Data
 {
     public static class DbSetExtensions
     {
-        public static Task<IPagedEnumerable<TProjected>> FindOrderedPagedProjectionAsync<TProjected, TEntity>(this DbSet<TEntity> dbSet, int page, int pageSize, string orderBy, string defaultOrderBy, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, bool>> condition, Expression<Func<TEntity, TProjected>> selector)
+        public static Task<IPagedEnumerable<TProjected>> FindOrderedPagedProjectionAsync<TProjected, TEntity>(this IQueryable<TEntity> dbSet, int page, int pageSize, string orderBy, string defaultOrderBy, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, bool>> condition, Expression<Func<TEntity, TProjected>> selector)
             where TEntity : class
         {
             if (string.IsNullOrEmpty(orderBy))
@@ -42,7 +42,7 @@ namespace PragmaticTalks.Data
             }
         }
 
-        public static async Task<IPagedEnumerable<TProjected>> FindOrderedPagedProjectionAsync<TProjected, TEntity>(this DbSet<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, bool>> condition, Expression<Func<TProjected, object>> orderBy, Expression<Func<TEntity, TProjected>> selector)
+        public static async Task<IPagedEnumerable<TProjected>> FindOrderedPagedProjectionAsync<TProjected, TEntity>(this IQueryable<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, bool>> condition, Expression<Func<TProjected, object>> orderBy, Expression<Func<TEntity, TProjected>> selector)
             where TEntity : class
         {
             var total = await dbSet.Where(preCondition).Select(selector).Where(condition).CountAsync();
@@ -50,13 +50,13 @@ namespace PragmaticTalks.Data
             return new PagedEnumerable<TProjected>(page, pageSize, total, items);
         }
 
-        public static Task<IPagedEnumerable<TProjected>> FindOrderedPagedProjectionAsync<TProjected, TEntity>(this DbSet<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, string search, string orderBy, string defaultOrderBy, Expression<Func<TEntity, TProjected>> selector)
+        public static Task<IPagedEnumerable<TProjected>> FindOrderedPagedProjectionAsync<TProjected, TEntity>(this IQueryable<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, string search, string orderBy, string defaultOrderBy, Expression<Func<TEntity, TProjected>> selector)
             where TEntity : class
         {
             return dbSet.FindOrderedPagedProjectionAsync(page, pageSize, orderBy, defaultOrderBy, preCondition, GetSearchExpression<TProjected>(search), selector);
         }
 
-        public static async Task<IPagedEnumerable<TProjected>> FindOrderedDescendingPagedProjectionAsync<TProjected, TEntity>(this DbSet<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, bool>> condition, Expression<Func<TProjected, object>> orderBy, Expression<Func<TEntity, TProjected>> selector)
+        public static async Task<IPagedEnumerable<TProjected>> FindOrderedDescendingPagedProjectionAsync<TProjected, TEntity>(this IQueryable<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, bool>> condition, Expression<Func<TProjected, object>> orderBy, Expression<Func<TEntity, TProjected>> selector)
             where TEntity : class
         {
             var total = await dbSet.Select(selector).Where(condition).CountAsync();
@@ -64,7 +64,7 @@ namespace PragmaticTalks.Data
             return new PagedEnumerable<TProjected>(page, pageSize, total, items);
         }
 
-        public static async Task<IPagedEnumerable<TProjected>> GetOrderedPagedProjectionAsync<TProjected, TEntity>(this DbSet<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, object>> orderBy, Expression<Func<TEntity, TProjected>> selector)
+        public static async Task<IPagedEnumerable<TProjected>> GetOrderedPagedProjectionAsync<TProjected, TEntity>(this IQueryable<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, object>> orderBy, Expression<Func<TEntity, TProjected>> selector)
             where TEntity : class
         {
             var total = await dbSet.Where(preCondition).CountAsync();
@@ -72,7 +72,7 @@ namespace PragmaticTalks.Data
             return new PagedEnumerable<TProjected>(page, pageSize, total, items);
         }
 
-        public static async Task<IPagedEnumerable<TProjected>> GetOrderedDescendingPagedProjectionAsync<TProjected, TEntity>(this DbSet<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, object>> orderBy, Expression<Func<TEntity, TProjected>> selector)
+        public static async Task<IPagedEnumerable<TProjected>> GetOrderedDescendingPagedProjectionAsync<TProjected, TEntity>(this IQueryable<TEntity> dbSet, int page, int pageSize, Expression<Func<TEntity, bool>> preCondition, Expression<Func<TProjected, object>> orderBy, Expression<Func<TEntity, TProjected>> selector)
             where TEntity : class
         {
             var total = await dbSet.Where(preCondition).CountAsync();

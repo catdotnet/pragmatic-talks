@@ -11,6 +11,8 @@ namespace PragmaticTalks.Data
 
         public DateTime DateCreation { get; set; }
 
+        public string Language { get; set; }
+
         public bool IsSelected { get; set; }
 
         public bool IsDeleted { get; set; }

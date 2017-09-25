@@ -1,84 +1,44 @@
 ﻿<template>
-  <div id="home" class="page">
-    <v-layout row>
-      <v-flex xs12 sm6 offset-sm3>
-        <v-card>
-          <v-list two-line subheader>
-            <v-subheader inset  v-locale="'Promoted'"></v-subheader>
-            <v-list-tile avatar v-for="item in items" :key="item.title" @click="">
-              <v-list-tile-avatar>
-                <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
-              </v-list-tile-avatar>
-                <v-list-tile-content>
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    <div><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></div>
-                </v-list-tile-content>
-            </v-list-tile>
-            <v-divider inset></v-divider>
-            <v-subheader inset v-locale="'Stack'"></v-subheader>
-            <v-list-tile v-for="item in items2" :key="item.title" avatar @click="">
-              <v-list-tile-avatar>
-                <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                  <div><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></div>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-          <v-card-actions class="white">
-                <v-spacer></v-spacer>
-                <v-btn floating fab dark router to="/create" success absolute top right>
-                    <v-icon>add</v-icon>
-                </v-btn>
-            </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </div>
+    <div id="home" class="page container fluid grid-list-md">
+        <v-layout row wrap>
+            <v-flex d-flex xs12 sm8 class="align-start">
+                <v-layout row wrap>
+                    <v-flex xs12>
+                        <v-next-event></v-next-event>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-ranking></v-ranking>
+                    </v-flex>
+                </v-layout>
+            </v-flex>
+            <v-flex d-flex xs12 sm4 class="align-start">
+                <v-layout row wrap>
+                    <v-flex xs12>
+                        <v-top-speakers></v-top-speakers>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-top-tags></v-top-tags>
+                    </v-flex>
+                </v-layout>
+            </v-flex>
+        </v-layout>
+    </div>
 </template>
 
 <script>
     import { mapActions } from 'vuex'
-    import service from '../../services/talks'
+    import NextEvent from './home/next-event'
+    import Ranking from './home/ranking'
+    import TopSpeakers from './home/top-speakers'
+    import TopTags from './home/top-tags'
 
     export default {
-        
+        components: { 'v-next-event': NextEvent, 'v-ranking': Ranking, 'v-top-speakers': TopSpeakers, 'v-top-tags': TopTags },
+
         data() {
             return {
-                items: [],
-                items2: []
+
             }
-        },
-
-        methods: {
-            ...mapActions(['loading']),
-            getTagClass(tag) {
-                return tag.color + ' white--text'
-            }
-        },
-
-        mounted() {
-            this.loading(true)
-            var items = [], items2 = [];
-            service.get().then(response => {
-                response.data.forEach(item => {
-                    if (item.isSelected) items.push({ icon: 'star', iconClass: 'amber lighten-1 white--text', title: item.title, tags: item.tags })
-                    else items2.push({ icon: 'lightbulb_outline', iconClass: 'cyan white--text', title: item.title, tags: item.tags })
-                })
-
-                if (items.length < 5) {
-                    new Array(5 - items.length).forEach(_ => {
-                        items.push({ icon: 'access_time', iconClass: 'grey lighten-1 white--text', title: 'Unasigned...' })
-                    });
-                }
-
-                this.items = items
-                this.items2 = items2
-                this.loading(false)
-            }).catch(error => {
-                this.loading(false)
-            });
         }
     }
 </script>
@@ -91,5 +51,10 @@
 
     .list__tile {
         font-size: 18px;
+    }
+
+    .align-start {
+        -webkit-align-content: flex-start; /* Safari */
+        align-content: flex-start;
     }
 </style>

@@ -16,8 +16,7 @@
                 columns: [
                     { text: 'title', value: 'title', type: "text", sortable: true, align: 'left'},
                     { text: 'date', value: 'dateCreation', type: "text", sortable: true, align: 'left' },
-                    { text: 'selected', value: 'isSelected', type: "text", sortable: true, align: 'left' },
-                    { text: 'deleted', value: 'isDeleted', type: "text", sortable: true, align: 'left' },
+                    { text: 'selected', value: 'isSelected', type: "checkbox", sortable: true, align: 'left', onChange: this.selectedChange },
                     { text: 'assigned', value: 'isAssignedToEvent', type: "text", sortable: true, align: 'left' },
                     { text: 'speaker', value: 'speakerName', type: "text", sortable: true, align: 'left' },
                 ],
@@ -29,6 +28,16 @@
                 searchFilter: true
             }
         },
+
+        methods: {
+            selectedChange(item, value, reload) {
+                if (item.isAssignedToEvent) return false;
+                var call = value ? service.select : service.unselect
+                call(item).then(response => {
+                }).catch(error => { reload() })
+            }
+        },
+
         mounted() {
            
         }

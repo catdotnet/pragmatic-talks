@@ -17,8 +17,17 @@
                                 {{ column.icon }}
                             </v-icon>
                         </span>
+                        <span v-else-if="column.type === 'image'">
+                            <img :src="props.item[column.value]" />
+                        </span>
+                        <span v-else-if="column.type === 'checkbox'">
+                            <v-checkbox v-model="props.item[column.value]" @change="(value) => column.onChange(props.item, value, reload)" light></v-checkbox>
+                        </span>
                         <span v-else-if="column.type === 'select'">
                             {{ getSelectText(column, props.item) }}
+                        </span>
+                        <span v-else-if="column.type === 'list'">
+                            {{ props.item[column.value].length || 0 }}
                         </span>
                         <span v-else>
                             {{ props.item[column.value] }}

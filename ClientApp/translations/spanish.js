@@ -8,14 +8,23 @@
     'Events': 'Eventos',
 
     'Next event': 'Siguiente evento',
+    'Last events': 'Últimos eventos',
     'Promoted': 'Promovido',
     'Stack': 'Stack',
+    'Top Speakers': 'Ponentes principales',
+    'Top Tags': 'Etiquetas principales',
+    'Unasigned...': 'Sin asignar...',
 
     'Create new talk': 'Crear nueva charla',
     'Title': 'Título',
     'Tags': 'Etiquetas',
+    'Language': 'Idioma',
     'Send': 'Enviar',
     'can not create talks': 'No puedes crear charlas. Haz login antes por favor.',
+    'max. 37 characters': 'no puede tener más de 37 caracteres',
+    'the title is required': 'el título es obligatorio',
+    'max. 3 tags': 'max. 3 etiquetas',
+    'required': 'obligatorio',
 
     'rule01': 'Nadie habla sobre las PRAGMATIC TALKS.',
     'rule02': 'NADIE HABLA sobre las PRAGMATIC TALKS.',

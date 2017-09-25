@@ -33,5 +33,15 @@ namespace PragmaticTalks.Controllers
         {
             return new StatusCodeResult((int)HttpStatusCode.Forbidden);
         }
+
+        protected IActionResult Created(object value)
+        {
+            return StatusCode((int)HttpStatusCode.Created, value);
+        }
+
+        protected IActionResult BadRequest(string message)
+        {
+            return StatusCode((int)HttpStatusCode.BadRequest, new { message = message });
+        }
     }
 }

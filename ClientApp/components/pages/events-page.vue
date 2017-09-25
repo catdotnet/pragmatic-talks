@@ -1,25 +1,25 @@
 ﻿<template>
-    <div id="rules">
+    <div id="events">
         <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-                <v-card>
-                    <v-card-title>
-                        <span class="headline" v-locale="'Rules'"></span>
-                    </v-card-title>
-                    <v-card-text>
-                        <ol>
-                            <li v-for="(o, index) in Array(11)" :key="index" v-locale="'rule' + ('0' + (index + 1)).slice(-2)"></li>
-                        </ol>
-                    </v-card-text>              
-                </v-card>
+               <v-next-event></v-next-event>
+            </v-flex>
+        </v-layout>
+        <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+               <v-last-events></v-last-events>
             </v-flex>
         </v-layout>
     </div>
 </template>
 
 <script>
+    import NextEvent from './home/next-event'
+    import LastEvents from './home/last-events'
+
     export default {
-        
+        components: { 'v-next-event': NextEvent, 'v-last-events': LastEvents },
+
         data() {
             return {
                

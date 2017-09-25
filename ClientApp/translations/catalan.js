@@ -8,14 +8,23 @@
     'Events': 'Esdeveniments',
 
     'Next event': 'Següent esdeveniment',
+    'Last events': 'Últims  esdeveniments',
     'Promoted': 'Promocionat',
     'Stack': 'Stack',
+    'Top Speakers': 'Ponents principals',
+    'Top Tags': 'Etiquetes principals',
+    'Unasigned...': 'Sense assignar...',
 
     'Create new talk': 'Crear una xerrada',
     'Title': 'Títol',
     'Tags': 'Etiquetes',
+    'Language': 'Idioma',
     'Send': 'Envia',
     'Can not create talks': 'No pots crear xerrades. Fes login abans si us plau. ',
+    'max. 37 characters': 'no pot tenir més de 37 caràcters',
+    'the title is required': 'el títol és obligatori',
+    'max. 3 tags': 'max. 3 etiquetes',
+    'required': 'obligatori',
 
     'rule01': 'Ningú parla sobre les Pragmatic TALKS.',
     'rule02': 'NINGÚ PARLA sobre les Pragmatic TALKS.',

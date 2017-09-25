@@ -33,7 +33,7 @@ namespace PragmaticTalks.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -67,14 +67,23 @@ namespace PragmaticTalks.Controllers
 
             // Sign in the user with this external login provider if the user already has a login.
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            var name = info.Principal.Identity.Name;
             if (result.Succeeded)
             {
+                var currentUser = await _userManager.FindByEmailAsync(email);
+                if (currentUser.IsBlocked)
+                {
+                    await _signInManager.SignOutAsync();
+                    ErrorMessage = $"User is blocked";
+                    return RedirectToLocal();
+                }
+
                 _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
                 return RedirectToLocal(returnUrl);
             }
 
-            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-            var name = info.Principal.Identity.Name;
+
             return await ExternalLoginConfirmation(name, email, returnUrl);
         }
 
@@ -123,12 +132,16 @@ namespace PragmaticTalks.Controllers
 
         private IActionResult RedirectToLocal(string returnUrl = null)
         {
+            
             if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
             else
             {
+                if (!string.IsNullOrEmpty(ErrorMessage))
+                    return RedirectToAction(nameof(HomeController.Index), "Home", new { errorMessage = ErrorMessage});
+
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }

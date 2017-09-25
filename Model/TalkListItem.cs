@@ -7,5 +7,7 @@
         public bool IsSelected { get; set; }
 
         public TagItem[] Tags { get; set; }
+
+        public string Language { get; set; }
     }
 }

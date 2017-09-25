@@ -9,9 +9,20 @@
                             <span class="headline" v-locale="'Create new talk'"></span>
                         </v-card-title>
                         <v-card-text>
-                            <v-text-field :label="t('Title')" v-model="title" :counter="37" :rules="titleRule" required></v-text-field>
+                            <v-text-field :label="t('Title')" v-model="title" :counter="37" :rules="titleRules" required></v-text-field>
                             <div class="space"></div>
-                            <v-select v-model="tags" :label="t('Tags')" :rules="tagsRule" multiple tags :items="items"></v-select>
+                            <v-select v-model="tags" :label="t('Tags')" :rules="tagsRules" multiple tags :items="tagItems"></v-select>
+                            <div class="space"></div>
+                            <v-select v-model="language" item-text="title" item-value="key" :label="t('Language')" :rules="languageRules" :items="languageItems">
+                                <template slot="item" scope="data">
+                                    <v-list-tile-action>
+                                        <v-icon>{{ data.item.icon }}</v-icon>
+                                    </v-list-tile-action>
+                                    <v-list-tile-content>
+                                        <span>{{ data.item.title }}</span>
+                                    </v-list-tile-content>
+                                </template>
+                            </v-select>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
@@ -49,16 +60,13 @@
             return {
                 valid: false,
                 title: '',
-                titleRule: [
-                    s => (s && s.length > 37) ? 'you can not add more than 37 characters' : true,
-                    s => (!s || s.length === 0) ? 'the title is required' : true
-                ],
-                tagsRule: [
-                    (v) => !!v && v.length <= 3 || 'max. 3 tags'
-                ],
                 tags: [],
-                items: [
-                ]
+                language: '',
+                titleRules: [],
+                tagsRules: [],
+                languageRules: [],
+                tagItems: [],
+                languageItems: []
             }
         },
 
@@ -75,7 +83,7 @@
             create() {
                 if (this.$refs.form.validate()) {
                     this.loading(true)
-                    service.post({ title: this.title, tags: this.tags }).then(response => {
+                    service.post({ title: this.title, tags: this.tags, language: this.language }).then(response => {
                         this.title = ''
                         this.tags = []
                         this.loading(false)
@@ -100,9 +108,28 @@
             tagsService.getAll().then(response => {
                 var items = [];
                 response.data.forEach(i => items.push(i.name))
-                this.items = items;
+                this.tagItems = items;
                 this.loading(false)
             })
+
+            
+            this.languageItems = [
+                { title: this.t('English'), key: 'en', icon: 'flag-us' },
+                { title: this.t('Spanish'), key: 'es', icon: 'flag-es' },
+                { title: this.t('Catalan'), key: 'ca', icon: 'flag-catalonia' }
+            ]
+            this.language = this.$locale
+
+            this.titleRules = [
+                s => (s && s.length > 37) ? this.t('max. 37 characters') : true,
+                s => (!s || s.length === 0) ? this.t('the title is required') : true
+            ]
+            this.tagsRules = [
+                (v) => !!v && v.length <= 3 || this.t('max. 3 tags')
+            ]
+            this.languageRules = [
+                (v) => !!v || this.t('required')
+            ]
         }
     }
 </script>

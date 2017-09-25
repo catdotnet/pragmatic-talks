@@ -8,14 +8,24 @@
     'Events': 'Events',
 
     'Next event': 'Next event',
+    'Last events': 'Last events',
     'Promoted': 'Promoted',
     'Stack': 'Stack',
+    'Top Speakers': 'Top Speakers',
+    'Top Tags': 'Top Tags',
+    'Unasigned...': 'Unasigned...',
 
     'Create new talk': 'Create new talk',
     'Title': 'Title',
     'Tags': 'Tags',
+    'Language': 'Language',
     'Send': 'Send',
     'can not create talks': 'Please, authenticate before creating a new talk.',
+    'max. 37 characters': 'you can not add more than 37 characters',
+    'the title is required': 'the title is required',
+    'max. 3 tags': 'max. 3 tags',
+    'required': 'required',
+
 
     'rule01': 'You do not talk about PRAGMATIC TALKS.',
     'rule02': 'You DO NOT talk about PRAGMATIC TALKS.',

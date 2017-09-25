@@ -6,14 +6,16 @@
                          v-model="show"
                          enable-resize-watcher>
         <v-list>
-            <v-list-tile avatar tag="div">
-                <v-list-tile-avatar>
-                    <v-icon>forum</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                    <v-list-tile-title>Pragmatic Talks</v-list-tile-title>
-                </v-list-tile-content>
-            </v-list-tile>
+            <router-link class="naviagation-title" :to="{ name: 'home'}">
+                <v-list-tile avatar tag="div">
+                    <v-list-tile-avatar>
+                        <v-icon>forum</v-icon>
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Pragmatic Talks</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </router-link>
 
             <router-link v-for="(item, index) in items" :key="index" class="router-link" :to="item.to" tag="li">
                 <a class="list__tile list__tile--active">
@@ -64,5 +66,7 @@
 </script>
 
 <style>
-    
+    .naviagation-title {
+        text-decoration: none;
+    }
 </style>

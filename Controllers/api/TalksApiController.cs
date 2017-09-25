@@ -28,17 +28,18 @@ namespace PragmaticTalks.Controllers
             {
                 Title = t.Title,
                 IsSelected = t.IsSelected,
-                Tags = t.Tags.Select(l => new TagItem { Name = l.Tag.Name, Color = l.Tag.Color }).ToArray()
+                Tags = t.Tags.Select(l => new TagItem { Name = l.Tag.Name, Color = l.Tag.Color }).ToArray(),
+                Language = t.Language
             });
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> SearchAsync(int page = 0, int pageSize = 10, string orderBy = null, string search = null, bool onlyOpened = false)
+        public async Task<IActionResult> SearchAsync(int page = 0, int pageSize = 10, string orderBy = null, string search = null, bool onlyOpened = true)
         {
             if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
 
             Expression<Func<Talk, bool>> preCondition;
-            if (onlyOpened) preCondition = p => p.IsDeleted == false;
+            if (onlyOpened) preCondition = t => t.IsDeleted == false && t.EventId == null;
             else preCondition = p => true;
 
             Expression<Func<Talk, TalkSearchItem>> selector = t => new TalkSearchItem
@@ -73,6 +74,7 @@ namespace PragmaticTalks.Controllers
             var talk = new Talk
             {
                 Title = request.Title,
+                Language = request.Language,
                 DateCreation = DateTime.UtcNow,
                 Speaker = CurrentUser
             };
@@ -87,23 +89,22 @@ namespace PragmaticTalks.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Created(string.Empty, new { id = talk.Id });
+            return Created(new { id = talk.Id });
         }
 
         [HttpPatch("{id}/selected")]
         public async Task<IActionResult> MarkAsSelectedAsync([FromRoute] int id)
         {
-            if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var selectedCount = await _context.Talks.Include("Speaker").CountAsync(t => t.IsSelected && t.EventId == null);
+            if (selectedCount >= 5) return BadRequest("There are already 5 talks selected");
 
-            var talk = await _context.Talks.SingleOrDefaultAsync(m => m.Id == id);
-            if (talk == null) return NotFound();
+            return await ModifyTalkAsync(id, talk => talk.IsSelected = true);
+        }
 
-
-            talk.IsSelected = true;
-            await _context.SaveChangesAsync();
-
-            return Ok(talk);
+        [HttpPatch("{id}/unselected")]
+        public Task<IActionResult> MarkAsUnselectedAsync([FromRoute] int id)
+        {
+            return ModifyTalkAsync(id, talk => talk.IsSelected = false);
         }
 
         [HttpDelete("{id}")]
@@ -120,6 +121,30 @@ namespace PragmaticTalks.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(talk);
+        }
+
+        private async Task<IActionResult> ModifyTalkAsync(int id, Action<Talk> action)
+        {
+            if (CurrentUser == null || !CurrentUser.IsAdministrator) return Forbidden();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var talk = await _context.Talks.Include("Speaker").SingleOrDefaultAsync(m => m.Id == id);
+            if (talk == null) return NotFound();
+
+            action(talk);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new TalkSearchItem
+            {
+                Id = talk.Id,
+                DateCreation = talk.DateCreation,
+                IsAssignedToEvent = talk.EventId != null,
+                IsDeleted = talk.IsDeleted,
+                IsSelected = talk.IsSelected,
+                SpeakerName = talk.Speaker.DisplayName,
+                Title = talk.Title
+            });
         }
     }
 }

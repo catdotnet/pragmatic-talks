@@ -19,6 +19,12 @@
                 <v-date-picker v-model="model" no-title="no-title" scrollable="scrollable" actions="actions"></v-date-picker>
             </v-menu>
         </template>
+
+        <template v-else-if="['list'].indexOf(field.type) > -1">
+            <ul v-if="model">
+                <li v-for="item in model">{{ item }}</li>
+            </ul>
+        </template>
         
         <v-text-field v-else-if="field.type === 'search-text'" @blur="emit" @keyup.native.enter="emit" v-model="model" v-bind="field" :label="field.label || field.text" :append-icon="'search'" :placeholder="field.placeholder" type="text" :multiLine="field.type == 'textarea'"></v-text-field>
 

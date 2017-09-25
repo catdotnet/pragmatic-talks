@@ -65,7 +65,7 @@
                 if (!action.click) return
 
                 var self = this.contextComponent ? this.contextComponent : this.$parent
-                var reloadMethod = this.$children[1].reload // be aware of layout changes
+                var reloadMethod = this.$children[0].reload // be aware of layout changes
                 action.click.call(self, reloadMethod)
             }
         }
