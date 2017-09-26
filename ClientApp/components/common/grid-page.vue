@@ -1,6 +1,6 @@
 ﻿<template>
     <v-card>
-        <v-grid :loadData="loadData" :columns="columns" :filters="filters" :actions="actions" :sortBy="sortBy" :contextComponent="computedContextComponent"></v-grid>
+        <v-grid :loadData="loadData" :columns="columns" :filters="filters" :actions="actions" :sortBy="sortBy" :autoSaveState="autoSaveState" :contextComponent="computedContextComponent"></v-grid>
 
         <v-card-actions class="white">
             <v-spacer></v-spacer>
@@ -37,6 +37,11 @@
             sortBy: {
                 required: false,
                 type: String
+            },
+            autoSaveState: {
+                required: false,
+                type: Boolean,
+                default: true
             },
             contextComponent: {
                 required: false,

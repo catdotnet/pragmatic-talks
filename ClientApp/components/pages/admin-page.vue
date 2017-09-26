@@ -17,7 +17,7 @@
                             <v-tabs-items>
                                 <v-tabs-content v-for="(c, i) in components"
                                                 :key="i"
-                                                :id="'tab-' + i">
+                                                :id="'tab-' + i" lazy>
                                     <v-card flat>
                                         <component :is="c"></component>
                                     </v-card>

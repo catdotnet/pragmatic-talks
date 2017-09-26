@@ -56,7 +56,7 @@ namespace PragmaticTalks.Controllers
 
             Expression<Func<Tag, Tag>> selector = t => t;
 
-            var model = await _context.Tags.FindOrderedPagedProjectionAsync(page, pageSize, preCondition, search, orderBy, "title", selector);
+            var model = await _context.Tags.FindOrderedPagedProjectionAsync(page, pageSize, preCondition, search, orderBy, "name", selector);
 
             return Ok(model);
         }

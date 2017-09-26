@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="page">
-        <v-grid-modal-crud-page :columns="columns" :service="service" :actions="actions" :sortBy="sortBy" :searchFilter="searchFilter"></v-grid-modal-crud-page>
+        <v-grid-modal-crud-page :columns="columns" :service="service" :actions="actions" :sortBy="sortBy" :searchFilter="searchFilter" :autoSaveState="autoSaveState"></v-grid-modal-crud-page>
     </div>
 </template>
 
@@ -25,7 +25,8 @@
                     delete: true
                 },
                 sortBy: 'title',
-                searchFilter: true
+                searchFilter: true,
+                autoSaveState: false
             }
         },
 

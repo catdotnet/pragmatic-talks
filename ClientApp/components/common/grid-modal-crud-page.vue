@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <v-grid-page :loadData="load" :columns="columns" :filters="filters" :actions="computedActions" :sortBy="sortBy" :contextComponent="computedContextComponent"></v-grid-page>
+        <v-grid-page :loadData="load" :columns="columns" :filters="filters" :actions="computedActions" :sortBy="sortBy" :autoSaveState="autoSaveState" :contextComponent="computedContextComponent"></v-grid-page>
         <v-delete-dialog :visible="deleteDialog.visible" :name="deleteDialog.item ? deleteDialog.item.name || deleteDialog.item.title || deleteDialog.item.displayName : ''" :action="deleteItem" @close="closeConfirmDelete"></v-delete-dialog>
         <v-form-dialog :title="editDialog.title" :visible="editDialog.visible" :fields="columns" :value="editDialog.item" :rules="editDialog.rules" :action="editItem" @close="closeEdit"></v-form-dialog>
     </div>
@@ -35,6 +35,11 @@
                 required: false,
                 type: Boolean,
                 defalt: false
+            },
+            autoSaveState: {
+                required: false,
+                type: Boolean,
+                default: true
             },
             contextComponent: {
                 required: false,
