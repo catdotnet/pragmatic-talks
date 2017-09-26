@@ -3,10 +3,10 @@
         <v-dialog v-model="shouldShow" persistent>
             <v-card>
                 <v-card-title>
-                    <div class="headline" v-localize="'Error'"></div>
+                    <div class="headline" v-locale="'Talk Created'"></div>
                 </v-card-title>
                 <v-card-text>
-                    {{ errorMessage }}
+                    <span v-locale="'Your talk has been created successfully'"></span>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -18,35 +18,31 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex'
-
     export default {
+
+        props: {
+            visible: {
+                required: true,
+                type: Boolean
+            }
+        },
+
         data() {
             return {
             }
         },
 
         computed: {
-            ...mapState({
-                errorMessage: state => state.errorMessage
-            }),
             shouldShow: {
-                get() { return !!this.errorMessage },
-                set(val) {  }
+                get() { return this.visible },
+                set(val) { }
             }
         },
 
         methods: {
-            ...mapActions(['error']),
             cancel() {
-                this.error('')
                 this.$emit('close')
             }
-        },
-
-        mounted() {
-            if (window.errorMessage)
-                this.error(window.errorMessage)
         }
     }
 </script>

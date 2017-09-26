@@ -26,6 +26,14 @@
     'max. 3 tags': 'max. 3 etiquetas',
     'required': 'obligatorio',
 
+    'Talk Created': 'Charla Creada',
+    'Your talk has been created successfully': 'Su charla ha sido creada satisfactoriamente',
+    'Use your Google+ account': 'Usa tu cuenta de Google+',
+    'Use your Twitter account': 'Usa tu cuenta de Twitter',
+    'Cancel': 'Cancelar',
+    'Ok': 'Aceptar',
+    'Error': 'Error',
+
     'rule01': 'Nadie habla sobre las PRAGMATIC TALKS.',
     'rule02': 'NADIE HABLA sobre las PRAGMATIC TALKS.',
     'rule03': 'Puedes hablar en INGLES, ESPAÑOL o CATALÁN.',

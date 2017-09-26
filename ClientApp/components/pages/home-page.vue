@@ -57,4 +57,11 @@
         -webkit-align-content: flex-start; /* Safari */
         align-content: flex-start;
     }
+
+    @media only screen and (max-width: 599px) {
+        .align-start {
+            -webkit-align-content: initial; /* Safari */
+            align-content: initial;
+        }
+    }
 </style>

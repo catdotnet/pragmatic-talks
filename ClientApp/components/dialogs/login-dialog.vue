@@ -10,7 +10,7 @@
                                     <v-flex xs7>
                                         <div>
                                             <div class="headline">Google</div>
-                                            <div>Use your Google+ account</div>
+                                            <div v-localize="'Use your Google+ account'"></div>
                                         </div>
                                     </v-flex>
                                     <v-flex xs5>
@@ -30,7 +30,7 @@
                                     <v-flex xs7>
                                         <div>
                                             <div class="headline">Twitter</div>
-                                            <div>Use your Twitter account</div>
+                                            <div v-localize="'Use your Twitter account'"></div>
                                         </div>
                                     </v-flex>
                                     <v-flex xs5>
@@ -45,7 +45,7 @@
                 </v-layout>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn class="red--text darken-1" flat="flat" @click.native="cancel">Cancel</v-btn>
+                    <v-btn class="red--text darken-1" flat="flat" @click.native="cancel"><span v-localize="'Cancel'"></span></v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>

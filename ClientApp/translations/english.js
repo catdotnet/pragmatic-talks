@@ -26,6 +26,13 @@
     'max. 3 tags': 'max. 3 tags',
     'required': 'required',
 
+    'Talk Created': 'Talk Created',
+    'Your talk has been created successfully': 'Your talk has been created successfully',
+    'Use your Google+ account': 'Use your Google+ account',
+    'Use your Twitter account': 'Use your Twitter account',
+    'Cancel': 'Cancel',
+    'Ok': 'Ok',
+    'Error': 'Error',
 
     'rule01': 'You do not talk about PRAGMATIC TALKS.',
     'rule02': 'You DO NOT talk about PRAGMATIC TALKS.',

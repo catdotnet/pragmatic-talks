@@ -26,6 +26,14 @@
     'max. 3 tags': 'max. 3 etiquetes',
     'required': 'obligatori',
 
+    'Talk Created': 'Xerrada Creada',
+    'Your talk has been created successfully': 'La seva xerrada ha estat creada satisfactòriament',
+    'Use your Google + account': 'Usa el teu compte de Google +',
+    'Use your Twitter account': 'Usa el teu compte de Twitter',
+    'Cancel': 'Cancel·la',
+    'Ok': "D'acord",
+    'Error': 'Error',
+
     'rule01': 'Ningú parla sobre les Pragmatic TALKS.',
     'rule02': 'NINGÚ PARLA sobre les Pragmatic TALKS.',
     'rule03': 'Pots parlar en ANGLÈS, ESPANYOL o CATALÀ.',

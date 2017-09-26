@@ -46,6 +46,7 @@
             </v-flex>
         </v-layout>
 
+        <v-talk-added-dialog :visible="addedDialogVisible" @close="addedDialogVisible = false"></v-talk-added-dialog>
     </div>
 </template>
 
@@ -53,8 +54,10 @@
     import { mapState, mapActions } from 'vuex'
     import service from '../../services/talks'
     import tagsService from '../../services/tags'
+    import TalkAddedDialog from '../dialogs/talk-added-dialog'
 
     export default {
+        components: { 'v-talk-added-dialog': TalkAddedDialog },
 
         data() {
             return {
@@ -66,7 +69,8 @@
                 tagsRules: [],
                 languageRules: [],
                 tagItems: [],
-                languageItems: []
+                languageItems: [],
+                addedDialogVisible: false
             }
         },
 
@@ -87,6 +91,7 @@
                         this.title = ''
                         this.tags = []
                         this.loading(false)
+                        this.addedDialogVisible = true
                     }).catch(error => {
                         this.loading(false)
                     })
