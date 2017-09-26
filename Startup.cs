@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PragmaticTalks.Data;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -32,7 +33,12 @@ namespace PragmaticTalks
         {
             services.AddMvc();
 
-            services.AddDbContext<PragmaticContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<PragmaticContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
+            {
+                sqlOptions.EnableRetryOnFailure(maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+            }));
 
             services.AddIdentity<Speaker, IdentityRole>()
                .AddEntityFrameworkStores<PragmaticContext>()
