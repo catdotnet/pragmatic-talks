@@ -1,8 +1,8 @@
 ﻿<template>
     <div id="home" class="page container fluid grid-list-md">
-        <v-layout row wrap>
-            <v-flex d-flex xs12 sm12 md8 lg8 xl8 class="align-start">
-                <v-layout row wrap>
+        <v-layout row wrap class="not-mobile">
+            <v-flex d-flex xs12 sm12 md8 lg8 xl8>
+                <v-layout row wrap xs12 sm12>
                     <v-flex xs12 sm12>
                         <v-next-event></v-next-event>
                     </v-flex>
@@ -20,6 +20,21 @@
                         <v-top-tags></v-top-tags>
                     </v-flex>
                 </v-layout>
+            </v-flex>
+        </v-layout>
+        <!-- work-arround... i don't know how to fix the problem with big titles in tasks displaying in mobile -->
+        <v-layout row wrap class="only-mobile">
+            <v-flex xs12 sm12>
+                <v-next-event></v-next-event>
+            </v-flex>
+            <v-flex xs12 sm12>
+                <v-ranking></v-ranking>
+            </v-flex>
+            <v-flex xs12 sm12>
+                <v-top-speakers></v-top-speakers>
+            </v-flex>
+            <v-flex xs12 sm12>
+                <v-top-tags></v-top-tags>
             </v-flex>
         </v-layout>
     </div>

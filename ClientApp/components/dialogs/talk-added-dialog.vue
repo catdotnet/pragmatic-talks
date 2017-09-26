@@ -10,7 +10,7 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn class="green--text darken-1" flat="flat" @click.native="cancel"><span v-localize="'Ok'"></span></v-btn>
+                    <v-btn class="green--text darken-1" flat="flat" @click.native="cancel"><span v-locale="'Ok'"></span></v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>

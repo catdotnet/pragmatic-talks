@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8c6c5708246391f1d1de"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b19e95704599386ad5a0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -13068,7 +13068,7 @@ exports = module.exports = __webpack_require__(4)(true);
 
 
 // module
-exports.push([module.i, "\n.chip {\n    font-size: 10px;\n    height: 24px;\n}\n.list__tile {\n    font-size: 18px;\n}\n.align-start {\n    -webkit-align-content: flex-start; /* Safari */\n    align-content: flex-start;\n}\n@media only screen and (max-width: 599px) {\n.align-start {\n        -webkit-align-content: initial; /* Safari */\n        align-content: initial;\n}\n}\n", "", {"version":3,"sources":["C:/projects/pragmatic-talks/ClientApp/components/pages/home-page.vue?44fa07ea"],"names":[],"mappings":";AA8CA;IACA,gBAAA;IACA,aAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,kCAAA,CAAA,YAAA;IACA,0BAAA;CACA;AAEA;AACA;QACA,+BAAA,CAAA,YAAA;QACA,uBAAA;CACA;CACA","file":"home-page.vue","sourcesContent":["<template>\r\n    <div id=\"home\" class=\"page container fluid grid-list-md\">\r\n        <v-layout row wrap>\r\n            <v-flex d-flex xs12 sm12 md8 lg8 xl8 class=\"align-start\">\r\n                <v-layout row wrap>\r\n                    <v-flex xs12 sm12>\r\n                        <v-next-event></v-next-event>\r\n                    </v-flex>\r\n                    <v-flex xs12 sm12>\r\n                        <v-ranking></v-ranking>\r\n                    </v-flex>\r\n                </v-layout>\r\n            </v-flex>\r\n            <v-flex d-flex xs12 sm12 md4 lg4 xl4 class=\"align-start\">\r\n                <v-layout row wrap>\r\n                    <v-flex xs12 sm12>\r\n                        <v-top-speakers></v-top-speakers>\r\n                    </v-flex>\r\n                    <v-flex xs12 sm12>\r\n                        <v-top-tags></v-top-tags>\r\n                    </v-flex>\r\n                </v-layout>\r\n            </v-flex>\r\n        </v-layout>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import { mapActions } from 'vuex'\r\n    import NextEvent from './home/next-event'\r\n    import Ranking from './home/ranking'\r\n    import TopSpeakers from './home/top-speakers'\r\n    import TopTags from './home/top-tags'\r\n\r\n    export default {\r\n        components: { 'v-next-event': NextEvent, 'v-ranking': Ranking, 'v-top-speakers': TopSpeakers, 'v-top-tags': TopTags },\r\n\r\n        data() {\r\n            return {\r\n\r\n            }\r\n        }\r\n    }\r\n</script>\r\n\r\n<style>\r\n    .chip {\r\n        font-size: 10px;\r\n        height: 24px;\r\n    }\r\n\r\n    .list__tile {\r\n        font-size: 18px;\r\n    }\r\n\r\n    .align-start {\r\n        -webkit-align-content: flex-start; /* Safari */\r\n        align-content: flex-start;\r\n    }\r\n\r\n    @media only screen and (max-width: 599px) {\r\n        .align-start {\r\n            -webkit-align-content: initial; /* Safari */\r\n            align-content: initial;\r\n        }\r\n    }\r\n</style>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.chip {\n    font-size: 10px;\n    height: 24px;\n}\n.list__tile {\n    font-size: 18px;\n}\n.align-start {\n    -webkit-align-content: flex-start; /* Safari */\n    align-content: flex-start;\n}\n@media only screen and (max-width: 599px) {\n.align-start {\n        -webkit-align-content: initial; /* Safari */\n        align-content: initial;\n}\n}\n", "", {"version":3,"sources":["C:/projects/pragmatic-talks/ClientApp/components/pages/home-page.vue?57ee050d"],"names":[],"mappings":";AA6DA;IACA,gBAAA;IACA,aAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,kCAAA,CAAA,YAAA;IACA,0BAAA;CACA;AAEA;AACA;QACA,+BAAA,CAAA,YAAA;QACA,uBAAA;CACA;CACA","file":"home-page.vue","sourcesContent":["<template>\r\n    <div id=\"home\" class=\"page container fluid grid-list-md\">\r\n        <v-layout row wrap class=\"not-mobile\">\r\n            <v-flex d-flex xs12 sm12 md8 lg8 xl8>\r\n                <v-layout row wrap xs12 sm12>\r\n                    <v-flex xs12 sm12>\r\n                        <v-next-event></v-next-event>\r\n                    </v-flex>\r\n                    <v-flex xs12 sm12>\r\n                        <v-ranking></v-ranking>\r\n                    </v-flex>\r\n                </v-layout>\r\n            </v-flex>\r\n            <v-flex d-flex xs12 sm12 md4 lg4 xl4 class=\"align-start\">\r\n                <v-layout row wrap>\r\n                    <v-flex xs12 sm12>\r\n                        <v-top-speakers></v-top-speakers>\r\n                    </v-flex>\r\n                    <v-flex xs12 sm12>\r\n                        <v-top-tags></v-top-tags>\r\n                    </v-flex>\r\n                </v-layout>\r\n            </v-flex>\r\n        </v-layout>\r\n        <!-- work-arround... i don't know how to fix the problem with big titles in tasks displaying in mobile -->\r\n        <v-layout row wrap class=\"only-mobile\">\r\n            <v-flex xs12 sm12>\r\n                <v-next-event></v-next-event>\r\n            </v-flex>\r\n            <v-flex xs12 sm12>\r\n                <v-ranking></v-ranking>\r\n            </v-flex>\r\n            <v-flex xs12 sm12>\r\n                <v-top-speakers></v-top-speakers>\r\n            </v-flex>\r\n            <v-flex xs12 sm12>\r\n                <v-top-tags></v-top-tags>\r\n            </v-flex>\r\n        </v-layout>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import { mapActions } from 'vuex'\r\n    import NextEvent from './home/next-event'\r\n    import Ranking from './home/ranking'\r\n    import TopSpeakers from './home/top-speakers'\r\n    import TopTags from './home/top-tags'\r\n\r\n    export default {\r\n        components: { 'v-next-event': NextEvent, 'v-ranking': Ranking, 'v-top-speakers': TopSpeakers, 'v-top-tags': TopTags },\r\n\r\n        data() {\r\n            return {\r\n\r\n            }\r\n        }\r\n    }\r\n</script>\r\n\r\n<style>\r\n    .chip {\r\n        font-size: 10px;\r\n        height: 24px;\r\n    }\r\n\r\n    .list__tile {\r\n        font-size: 18px;\r\n    }\r\n\r\n    .align-start {\r\n        -webkit-align-content: flex-start; /* Safari */\r\n        align-content: flex-start;\r\n    }\r\n\r\n    @media only screen and (max-width: 599px) {\r\n        .align-start {\r\n            -webkit-align-content: initial; /* Safari */\r\n            align-content: initial;\r\n        }\r\n    }\r\n</style>"],"sourceRoot":""}]);
 
 // exports
 
@@ -15378,6 +15378,14 @@ exports.default = {
     'max. 3 tags': 'max. 3 etiquetes',
     'required': 'obligatori',
 
+    'Talk Created': 'Xerrada Creada',
+    'Your talk has been created successfully': 'La seva xerrada ha estat creada satisfactòriament',
+    'Use your Google + account': 'Usa el teu compte de Google +',
+    'Use your Twitter account': 'Usa el teu compte de Twitter',
+    'Cancel': 'Cancel·la',
+    'Ok': "D'acord",
+    'Error': 'Error',
+
     'rule01': 'Ningú parla sobre les Pragmatic TALKS.',
     'rule02': 'NINGÚ PARLA sobre les Pragmatic TALKS.',
     'rule03': 'Pots parlar en ANGLÈS, ESPANYOL o CATALÀ.',
@@ -15432,6 +15440,11 @@ exports.default = {
 
     'Talk Created': 'Talk Created',
     'Your talk has been created successfully': 'Your talk has been created successfully',
+    'Use your Google+ account': 'Use your Google+ account',
+    'Use your Twitter account': 'Use your Twitter account',
+    'Cancel': 'Cancel',
+    'Ok': 'Ok',
+    'Error': 'Error',
 
     'rule01': 'You do not talk about PRAGMATIC TALKS.',
     'rule02': 'You DO NOT talk about PRAGMATIC TALKS.',
@@ -15484,6 +15497,14 @@ exports.default = {
     'the title is required': 'el título es obligatorio',
     'max. 3 tags': 'max. 3 etiquetas',
     'required': 'obligatorio',
+
+    'Talk Created': 'Charla Creada',
+    'Your talk has been created successfully': 'Su charla ha sido creada satisfactoriamente',
+    'Use your Google+ account': 'Usa tu cuenta de Google+',
+    'Use your Twitter account': 'Usa tu cuenta de Twitter',
+    'Cancel': 'Cancelar',
+    'Ok': 'Aceptar',
+    'Error': 'Error',
 
     'rule01': 'Nadie habla sobre las PRAGMATIC TALKS.',
     'rule02': 'NADIE HABLA sobre las PRAGMATIC TALKS.',
@@ -23337,8 +23358,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "shouldShow"
     }
   }, [_c('v-card', [_c('v-card-title', [_c('div', {
+    directives: [{
+      name: "locale",
+      rawName: "v-locale",
+      value: ('Error'),
+      expression: "'Error'"
+    }],
     staticClass: "headline"
-  }, [_vm._v("Error")])]), _vm._v(" "), _c('v-card-text', [_vm._v("\n                " + _vm._s(_vm.errorMessage) + "\n            ")]), _vm._v(" "), _c('v-card-actions', [_c('v-spacer'), _vm._v(" "), _c('v-btn', {
+  })]), _vm._v(" "), _c('v-card-text', [_vm._v("\n                " + _vm._s(_vm.errorMessage) + "\n            ")]), _vm._v(" "), _c('v-card-actions', [_c('v-spacer'), _vm._v(" "), _c('v-btn', {
     staticClass: "green--text darken-1",
     attrs: {
       "flat": "flat"
@@ -23348,7 +23375,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.cancel($event)
       }
     }
-  }, [_vm._v("Ok")])], 1)], 1)], 1)], 1)
+  }, [_c('span', {
+    directives: [{
+      name: "locale",
+      rawName: "v-locale",
+      value: ('Ok'),
+      expression: "'Ok'"
+    }]
+  })])], 1)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
@@ -23404,7 +23438,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.cancel($event)
       }
     }
-  }, [_vm._v("Ok")])], 1)], 1)], 1)], 1)
+  }, [_c('span', {
+    directives: [{
+      name: "locale",
+      rawName: "v-locale",
+      value: ('Ok'),
+      expression: "'Ok'"
+    }]
+  })])], 1)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
@@ -23573,7 +23614,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', [_c('div', {
     staticClass: "headline"
-  }, [_vm._v("Google")]), _vm._v(" "), _c('div', [_vm._v("Use your Google+ account")])])]), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("Google")]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "locale",
+      rawName: "v-locale",
+      value: ('Use your Google+ account'),
+      expression: "'Use your Google+ account'"
+    }]
+  })])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "xs5": ""
     }
@@ -23604,7 +23652,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', [_c('div', {
     staticClass: "headline"
-  }, [_vm._v("Twitter")]), _vm._v(" "), _c('div', [_vm._v("Use your Twitter account")])])]), _vm._v(" "), _c('v-flex', {
+  }, [_vm._v("Twitter")]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "locale",
+      rawName: "v-locale",
+      value: ('Use your Twitter account'),
+      expression: "'Use your Twitter account'"
+    }]
+  })])]), _vm._v(" "), _c('v-flex', {
     attrs: {
       "xs5": ""
     }
@@ -23629,7 +23684,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.cancel($event)
       }
     }
-  }, [_vm._v("Cancel")])], 1)], 1)], 1)], 1)
+  }, [_c('span', {
+    directives: [{
+      name: "locale",
+      rawName: "v-locale",
+      value: ('Cancel'),
+      expression: "'Cancel'"
+    }]
+  })])], 1)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
@@ -24693,12 +24755,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "home"
     }
   }, [_c('v-layout', {
+    staticClass: "not-mobile",
     attrs: {
       "row": "",
       "wrap": ""
     }
   }, [_c('v-flex', {
-    staticClass: "align-start",
     attrs: {
       "d-flex": "",
       "xs12": "",
@@ -24710,7 +24772,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('v-layout', {
     attrs: {
       "row": "",
-      "wrap": ""
+      "wrap": "",
+      "xs12": "",
+      "sm12": ""
     }
   }, [_c('v-flex', {
     attrs: {
@@ -24747,7 +24811,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "xs12": "",
       "sm12": ""
     }
-  }, [_c('v-top-tags')], 1)], 1)], 1)], 1)], 1)
+  }, [_c('v-top-tags')], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-layout', {
+    staticClass: "only-mobile",
+    attrs: {
+      "row": "",
+      "wrap": ""
+    }
+  }, [_c('v-flex', {
+    attrs: {
+      "xs12": "",
+      "sm12": ""
+    }
+  }, [_c('v-next-event')], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs12": "",
+      "sm12": ""
+    }
+  }, [_c('v-ranking')], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs12": "",
+      "sm12": ""
+    }
+  }, [_c('v-top-speakers')], 1), _vm._v(" "), _c('v-flex', {
+    attrs: {
+      "xs12": "",
+      "sm12": ""
+    }
+  }, [_c('v-top-tags')], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
