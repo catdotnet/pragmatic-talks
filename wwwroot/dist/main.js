@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "712c9753642d31097918"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a59c132341ba22a4d096"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -13068,7 +13068,7 @@ exports = module.exports = __webpack_require__(4)(true);
 
 
 // module
-exports.push([module.i, "\n.chip {\n    font-size: 10px;\n    height: 24px;\n}\n.list__tile {\n    font-size: 18px;\n}\n.align-start {\n    -webkit-align-content: flex-start; /* Safari */\n    align-content: flex-start;\n}\n@media only screen and (max-width: 599px) {\n.align-start {\n        -webkit-align-content: initial; /* Safari */\n        align-content: initial;\n}\n}\n", "", {"version":3,"sources":["C:/projects/pragmatic-talks/ClientApp/components/pages/home-page.vue?57ee050d"],"names":[],"mappings":";AA6DA;IACA,gBAAA;IACA,aAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,kCAAA,CAAA,YAAA;IACA,0BAAA;CACA;AAEA;AACA;QACA,+BAAA,CAAA,YAAA;QACA,uBAAA;CACA;CACA","file":"home-page.vue","sourcesContent":["<template>\r\n    <div id=\"home\" class=\"page container fluid grid-list-md\">\r\n        <v-layout row wrap class=\"not-mobile\">\r\n            <v-flex d-flex xs12 sm12 md8 lg8 xl8>\r\n                <v-layout row wrap xs12 sm12>\r\n                    <v-flex xs12 sm12>\r\n                        <v-next-event></v-next-event>\r\n                    </v-flex>\r\n                    <v-flex xs12 sm12>\r\n                        <v-ranking></v-ranking>\r\n                    </v-flex>\r\n                </v-layout>\r\n            </v-flex>\r\n            <v-flex d-flex xs12 sm12 md4 lg4 xl4 class=\"align-start\">\r\n                <v-layout row wrap>\r\n                    <v-flex xs12 sm12>\r\n                        <v-top-speakers></v-top-speakers>\r\n                    </v-flex>\r\n                    <v-flex xs12 sm12>\r\n                        <v-top-tags></v-top-tags>\r\n                    </v-flex>\r\n                </v-layout>\r\n            </v-flex>\r\n        </v-layout>\r\n        <!-- work-arround... i don't know how to fix the problem with big titles in tasks displaying in mobile -->\r\n        <v-layout row wrap class=\"only-mobile\">\r\n            <v-flex xs12 sm12>\r\n                <v-next-event></v-next-event>\r\n            </v-flex>\r\n            <v-flex xs12 sm12>\r\n                <v-ranking></v-ranking>\r\n            </v-flex>\r\n            <v-flex xs12 sm12>\r\n                <v-top-speakers></v-top-speakers>\r\n            </v-flex>\r\n            <v-flex xs12 sm12>\r\n                <v-top-tags></v-top-tags>\r\n            </v-flex>\r\n        </v-layout>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import { mapActions } from 'vuex'\r\n    import NextEvent from './home/next-event'\r\n    import Ranking from './home/ranking'\r\n    import TopSpeakers from './home/top-speakers'\r\n    import TopTags from './home/top-tags'\r\n\r\n    export default {\r\n        components: { 'v-next-event': NextEvent, 'v-ranking': Ranking, 'v-top-speakers': TopSpeakers, 'v-top-tags': TopTags },\r\n\r\n        data() {\r\n            return {\r\n\r\n            }\r\n        }\r\n    }\r\n</script>\r\n\r\n<style>\r\n    .chip {\r\n        font-size: 10px;\r\n        height: 24px;\r\n    }\r\n\r\n    .list__tile {\r\n        font-size: 18px;\r\n    }\r\n\r\n    .align-start {\r\n        -webkit-align-content: flex-start; /* Safari */\r\n        align-content: flex-start;\r\n    }\r\n\r\n    @media only screen and (max-width: 599px) {\r\n        .align-start {\r\n            -webkit-align-content: initial; /* Safari */\r\n            align-content: initial;\r\n        }\r\n    }\r\n</style>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.chip {\n    font-size: 10px;\n    height: 24px;\n}\n.list__tile {\n    font-size: 18px;\n}\n", "", {"version":3,"sources":["C:/projects/pragmatic-talks/ClientApp/components/pages/home-page.vue?70b6361d"],"names":[],"mappings":";AA0CA;IACA,gBAAA;IACA,aAAA;CACA;AAEA;IACA,gBAAA;CACA","file":"home-page.vue","sourcesContent":["<template>\r\n    <div id=\"home\" class=\"page container fluid grid-list-md\">\r\n        <v-layout row wrap>\r\n            <v-flex xs12 sm12 md8 lg8 xl8>\r\n                <v-flex xs12 sm12>\r\n                    <v-next-event></v-next-event>\r\n                </v-flex>\r\n                <v-flex xs12 sm12>\r\n                    <v-ranking></v-ranking>\r\n                </v-flex>\r\n            </v-flex>\r\n            <v-flex xs12 sm12 md4 lg4 xl4>\r\n                <v-flex xs12 sm12>\r\n                    <v-top-speakers></v-top-speakers>\r\n                </v-flex>\r\n                <v-flex xs12 sm12>\r\n                    <v-top-tags></v-top-tags>\r\n                </v-flex>\r\n            </v-flex>\r\n        </v-layout>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import { mapActions } from 'vuex'\r\n    import NextEvent from './home/next-event'\r\n    import Ranking from './home/ranking'\r\n    import TopSpeakers from './home/top-speakers'\r\n    import TopTags from './home/top-tags'\r\n\r\n    export default {\r\n        components: { 'v-next-event': NextEvent, 'v-ranking': Ranking, 'v-top-speakers': TopSpeakers, 'v-top-tags': TopTags },\r\n\r\n        data() {\r\n            return {\r\n\r\n            }\r\n        }\r\n    }\r\n</script>\r\n\r\n<style>\r\n    .chip {\r\n        font-size: 10px;\r\n        height: 24px;\r\n    }\r\n\r\n    .list__tile {\r\n        font-size: 18px;\r\n    }\r\n</style>"],"sourceRoot":""}]);
 
 // exports
 
@@ -15990,6 +15990,11 @@ exports.default = {
             type: Boolean,
             defalt: false
         },
+        autoSaveState: {
+            required: false,
+            type: Boolean,
+            default: true
+        },
         contextComponent: {
             required: false,
             type: Object,
@@ -16152,6 +16157,11 @@ exports.default = {
         sortBy: {
             required: false,
             type: String
+        },
+        autoSaveState: {
+            required: false,
+            type: Boolean,
+            default: true
         },
         contextComponent: {
             required: false,
@@ -16783,7 +16793,8 @@ exports.default = {
                 delete: true
             },
             sortBy: 'name',
-            searchFilter: true
+            searchFilter: true,
+            autoSaveState: false
         };
     },
     mounted: function mounted() {}
@@ -16821,7 +16832,8 @@ exports.default = {
                 delete: true
             },
             sortBy: 'displayName',
-            searchFilter: true
+            searchFilter: true,
+            autoSaveState: false
         };
     },
 
@@ -16880,7 +16892,8 @@ exports.default = {
                 delete: true
             },
             sortBy: 'name',
-            searchFilter: true
+            searchFilter: true,
+            autoSaveState: false
         };
     },
     mounted: function mounted() {
@@ -16925,7 +16938,8 @@ exports.default = {
                 delete: true
             },
             sortBy: 'title',
-            searchFilter: true
+            searchFilter: true,
+            autoSaveState: false
         };
     },
 
@@ -23234,7 +23248,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "service": _vm.service,
       "actions": _vm.actions,
       "sortBy": _vm.sortBy,
-      "searchFilter": _vm.searchFilter
+      "searchFilter": _vm.searchFilter,
+      "autoSaveState": _vm.autoSaveState
     }
   })], 1)
 },staticRenderFns: []}
@@ -24022,7 +24037,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "service": _vm.service,
       "actions": _vm.actions,
       "sortBy": _vm.sortBy,
-      "searchFilter": _vm.searchFilter
+      "searchFilter": _vm.searchFilter,
+      "autoSaveState": _vm.autoSaveState
     }
   })], 1)
 },staticRenderFns: []}
@@ -24439,6 +24455,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "filters": _vm.filters,
       "actions": _vm.actions,
       "sortBy": _vm.sortBy,
+      "autoSaveState": _vm.autoSaveState,
       "contextComponent": _vm.computedContextComponent
     }
   }), _vm._v(" "), _c('v-card-actions', {
@@ -24490,6 +24507,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "filters": _vm.filters,
       "actions": _vm.computedActions,
       "sortBy": _vm.sortBy,
+      "autoSaveState": _vm.autoSaveState,
       "contextComponent": _vm.computedContextComponent
     }
   }), _vm._v(" "), _c('v-delete-dialog', {
@@ -24536,7 +24554,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "service": _vm.service,
       "actions": _vm.actions,
       "sortBy": _vm.sortBy,
-      "searchFilter": _vm.searchFilter
+      "searchFilter": _vm.searchFilter,
+      "autoSaveState": _vm.autoSaveState
     }
   })], 1)
 },staticRenderFns: []}
@@ -24756,27 +24775,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "home"
     }
   }, [_c('v-layout', {
-    staticClass: "not-mobile",
     attrs: {
       "row": "",
       "wrap": ""
     }
   }, [_c('v-flex', {
     attrs: {
-      "d-flex": "",
       "xs12": "",
       "sm12": "",
       "md8": "",
       "lg8": "",
       "xl8": ""
     }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": "",
-      "wrap": "",
-      "xs12": "",
-      "sm12": ""
-    }
   }, [_c('v-flex', {
     attrs: {
       "xs12": "",
@@ -24787,21 +24797,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "xs12": "",
       "sm12": ""
     }
-  }, [_c('v-ranking')], 1)], 1)], 1), _vm._v(" "), _c('v-flex', {
-    staticClass: "align-start",
+  }, [_c('v-ranking')], 1)], 1), _vm._v(" "), _c('v-flex', {
     attrs: {
-      "d-flex": "",
       "xs12": "",
       "sm12": "",
       "md4": "",
       "lg4": "",
       "xl4": ""
     }
-  }, [_c('v-layout', {
-    attrs: {
-      "row": "",
-      "wrap": ""
-    }
   }, [_c('v-flex', {
     attrs: {
       "xs12": "",
@@ -24812,33 +24815,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "xs12": "",
       "sm12": ""
     }
-  }, [_c('v-top-tags')], 1)], 1)], 1)], 1), _vm._v(" "), _c('v-layout', {
-    staticClass: "only-mobile",
-    attrs: {
-      "row": "",
-      "wrap": ""
-    }
-  }, [_c('v-flex', {
-    attrs: {
-      "xs12": "",
-      "sm12": ""
-    }
-  }, [_c('v-next-event')], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "xs12": "",
-      "sm12": ""
-    }
-  }, [_c('v-ranking')], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "xs12": "",
-      "sm12": ""
-    }
-  }, [_c('v-top-speakers')], 1), _vm._v(" "), _c('v-flex', {
-    attrs: {
-      "xs12": "",
-      "sm12": ""
-    }
-  }, [_c('v-top-tags')], 1)], 1)], 1)
+  }, [_c('v-top-tags')], 1)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
@@ -24861,7 +24838,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "service": _vm.service,
       "actions": _vm.actions,
       "sortBy": _vm.sortBy,
-      "searchFilter": _vm.searchFilter
+      "searchFilter": _vm.searchFilter,
+      "autoSaveState": _vm.autoSaveState
     }
   })], 1)
 },staticRenderFns: []}
