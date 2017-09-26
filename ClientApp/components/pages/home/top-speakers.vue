@@ -1,8 +1,11 @@
 ﻿<template>
     <v-card>
-        <v-list subheader>
-            <v-subheader inset v-locale="'Top Speakers'"></v-subheader>
-            <v-list-tile v-for="item in items" :key="item.title" avatar> <!--  @click="" -->
+        <v-card-title primary-title>
+            <h3 class="headline mb-0" v-locale="'Top Speakers'"></h3>
+        </v-card-title>
+        <v-list>
+            <v-list-tile v-for="item in items" :key="item.title" avatar>
+                <!--  @click="" -->
                 <v-list-tile-avatar>
                     <img :src="item.avatarUrl" />
                 </v-list-tile-avatar>

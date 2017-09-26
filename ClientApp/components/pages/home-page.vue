@@ -1,22 +1,22 @@
 ﻿<template>
     <div id="home" class="page container fluid grid-list-md">
         <v-layout row wrap>
-            <v-flex d-flex xs12 sm8 class="align-start">
+            <v-flex d-flex xs12 sm12 md8 lg8 xl8 class="align-start">
                 <v-layout row wrap>
-                    <v-flex xs12>
+                    <v-flex xs12 sm12>
                         <v-next-event></v-next-event>
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs12 sm12>
                         <v-ranking></v-ranking>
                     </v-flex>
                 </v-layout>
             </v-flex>
-            <v-flex d-flex xs12 sm4 class="align-start">
+            <v-flex d-flex xs12 sm12 md4 lg4 xl4 class="align-start">
                 <v-layout row wrap>
-                    <v-flex xs12>
+                    <v-flex xs12 sm12>
                         <v-top-speakers></v-top-speakers>
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs12 sm12>
                         <v-top-tags></v-top-tags>
                     </v-flex>
                 </v-layout>

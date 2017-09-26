@@ -1,5 +1,8 @@
 ﻿<template>
     <v-card>
+        <v-card-title primary-title>
+            <h3 class="headline mb-0" v-locale="'Talks'"></h3>
+        </v-card-title>
         <v-list two-line subheader>
             <v-subheader inset v-locale="'Promoted'"></v-subheader>
             <v-list-tile avatar v-for="item in items" :key="item.title"> <!-- @click="" -->
@@ -8,7 +11,7 @@
                 </v-list-tile-avatar>
                 <v-list-tile-content>
                     <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    <div><v-chip v-if="item.language"><v-icon>{{ getFlag(item) }}</v-icon></v-chip><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></div>
+                    <v-list-tile-sub-title><v-chip v-if="item.language"><v-icon>{{ getFlag(item) }}</v-icon></v-chip><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></v-list-tile-sub-title>
                 </v-list-tile-content>
             </v-list-tile>
             <v-divider inset></v-divider>
@@ -19,7 +22,7 @@
                 </v-list-tile-avatar>
                 <v-list-tile-content>
                     <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    <div><v-chip><v-icon>{{ getFlag(item) }}</v-icon></v-chip><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></div>
+                    <v-list-tile-sub-title><v-chip><v-icon>{{ getFlag(item) }}</v-icon></v-chip><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></v-list-tile-sub-title>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>

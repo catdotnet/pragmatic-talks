@@ -1,7 +1,9 @@
 ﻿<template>
     <v-card v-if="items">
-        <v-list three-line subheader>
-            <v-subheader inset v-locale="'Last events'"></v-subheader>
+        <v-card-title primary-title>
+            <h3 class="headline mb-0" v-locale="'Last events'"></h3>
+        </v-card-title>
+        <v-list three-line>
             <v-list-tile v-for="(item, index) in items" :key="index" avatar> <!-- @click="" -->
                 <v-list-tile-content>
                     <v-list-tile-title>
@@ -9,7 +11,7 @@
                         <b class="subtitle">{{ getDate(item) }}</b>
                         <a href="item.url" v-if="item.url" target="_blank" title="meetup event"><i class="fa fa-meetup"></i></a>
                     </v-list-tile-title>
-                    <div><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></div>
+                    <v-list-tile-sub-title><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></v-list-tile-sub-title>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>

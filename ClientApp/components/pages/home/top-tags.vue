@@ -1,7 +1,7 @@
 ﻿<template>
     <v-card>
-        <v-list subheader>
-            <v-subheader inset v-locale="'Top Tags'"></v-subheader>
+        <v-card-title primary-title>
+            <h3 class="headline mb-0" v-locale="'Top Tags'"></h3>
             <div>
                 <v-chip v-for="item in items" :key="item.name" :class="item.color + ' white--text'">
                     <strong>{{ item.name }}</strong>
@@ -9,7 +9,7 @@
                     <span>({{ item.talksCount }})</span>
                 </v-chip>
             </div>
-        </v-list>
+        </v-card-title>
     </v-card>
 </template>
 
