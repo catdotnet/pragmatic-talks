@@ -1,11 +1,11 @@
 ﻿import Vue from 'vue'
 import axios from 'axios'
 import router from './router'
-import store from './store/store'
+import store from 'store/store'
 import { sync } from 'vuex-router-sync'
-import locale from './plugins/locale/vue-locale'
-import translations from './translations/all'
-import App from './components/app-root'
+import locale from 'plugins/locale/vue-locale'
+import translations from 'translations/all'
+import App from 'components/app-root'
 
 Vue.prototype.$http = axios
 

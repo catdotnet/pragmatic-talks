@@ -32,9 +32,10 @@ namespace PragmaticTalks.Controllers
                 Id = @event.Id,
                 Date = @event.Date,
                 Name = @event.Name,
+                Url = @event.Url,
                 Talks = @event.Talks.Select(t => t.Title),
-                Tags = @event.Talks.SelectMany(t => t.Tags).Select(tt => tt.Tag).Distinct().Select(t => new TagItem { Name = t.Name, Color = t.Color }),
-                Speakers = @event.Talks.Select(t => t.Speaker).Distinct().Select(s => new SpeakerItem { Name = s.DisplayName, AvatarUrl = s.AvatarUrl })
+                Tags = @event.Talks.SelectMany(t => t.Tags).Select(tt => tt.Tag).Distinct().OrderBy(t => t.Name).Select(t => new TagItem { Name = t.Name, Color = t.Color }),
+                Speakers = @event.Talks.Select(t => t.Speaker).Distinct().OrderBy(s => s).Select(s => new SpeakerItem { Name = s.DisplayName, AvatarUrl = s.AvatarUrl })
             });
         }
 
@@ -47,9 +48,10 @@ namespace PragmaticTalks.Controllers
                 Id = @event.Id,
                 Date = @event.Date,
                 Name = @event.Name,
+                Url = @event.Url,
                 Talks = @event.Talks.Select(t => t.Title),
-                Tags = @event.Talks.SelectMany(t => t.Tags).Select(tt => tt.Tag).Distinct().Select(t => new TagItem { Name = t.Name, Color = t.Color }),
-                Speakers = @event.Talks.Select(t => t.Speaker).Distinct().Select(s => new SpeakerItem { Name = s.DisplayName, AvatarUrl = s.AvatarUrl })
+                Tags = @event.Talks.SelectMany(t => t.Tags).Select(tt => tt.Tag).Distinct().OrderBy(t => t.Name).Select(t => new TagItem { Name = t.Name, Color = t.Color }),
+                Speakers = @event.Talks.Select(t => t.Speaker).Distinct().OrderBy(s => s).Select(s => new SpeakerItem { Name = s.DisplayName, AvatarUrl = s.AvatarUrl })
             });
             return Ok(model);
         }

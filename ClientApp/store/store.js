@@ -8,12 +8,14 @@ Vue.use(Vuex)
 const MAIN_SET_LOADING = 'MAIN_SET_LOADING'
 const MAIN_SET_LOGIN = 'MAIN_SET_LOGIN'
 const MAIN_SET_ERROR = 'MAIN_SET_ERROR'
+const MAIN_SET_EVENT = 'MAIN_SET_EVENT'
 
 // STATE
 const state = {
     isLoading: false,
     isLogin: false,
-    errorMessage: ''
+    errorMessage: '',
+    event: null
 }
 
 // GETTERS
@@ -31,6 +33,9 @@ const mutations = {
     },
     [MAIN_SET_ERROR](state, message) {
         state.errorMessage = message
+    },
+    [MAIN_SET_EVENT](state, event) {
+        state.event = event
     }
 }
 
@@ -44,6 +49,9 @@ const actions = {
     },
     error(context, message) {
         context.commit(MAIN_SET_ERROR, message)
+    },
+    setEvent(context, event) {
+        context.commit(MAIN_SET_EVENT, event)
     }
 }
 

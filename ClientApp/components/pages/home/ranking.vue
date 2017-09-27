@@ -5,26 +5,10 @@
         </v-card-title>
         <v-list two-line subheader>
             <v-subheader inset v-locale="'Promoted'"></v-subheader>
-            <v-list-tile avatar v-for="item in items" :key="item.title"> <!-- @click="" -->
-                <v-list-tile-avatar>
-                    <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    <v-list-tile-sub-title><v-chip v-if="item.language"><v-icon>{{ getFlag(item) }}</v-icon></v-chip><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></v-list-tile-sub-title>
-                </v-list-tile-content>
-            </v-list-tile>
+            <v-talk v-for="item in items" :key="item.title" :item="item"></v-talk>
             <v-divider inset></v-divider>
             <v-subheader inset v-locale="'Stack'"></v-subheader>
-            <v-list-tile v-for="item in items2" :key="item.title" avatar> <!-- @click="" -->
-                <v-list-tile-avatar>
-                    <v-icon v-bind:class="[item.iconClass]">{{ item.icon }}</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    <v-list-tile-sub-title><v-chip><v-icon>{{ getFlag(item) }}</v-icon></v-chip><v-chip v-for="tag in item.tags" :key="tag.name" :class="getTagClass(tag)">{{ tag.name }}</v-chip></v-list-tile-sub-title>
-                </v-list-tile-content>
-            </v-list-tile>
+            <v-talk v-for="item in items2" :key="item.title" :item="item"></v-talk>
         </v-list>
         <v-card-actions class="white">
             <v-spacer></v-spacer>
@@ -37,9 +21,11 @@
 
 <script>
     import { mapActions } from 'vuex'
+    import Talk from './talk'
     import service from '../../../services/talks'
 
     export default {
+        components: { 'v-talk': Talk },
 
         data() {
             return {
@@ -49,18 +35,7 @@
         },
 
         methods: {
-            ...mapActions(['loading']),
-            getTagClass(tag) {
-                return tag.color + ' white--text'
-            },
-            getFlag(item) {
-                var flag = {
-                    'en': 'flag-us',
-                    'es': 'flag-es',
-                    'ca': 'flag-catalonia'
-                }
-                return flag[item.language]
-            }
+            ...mapActions(['loading'])
         },
 
         mounted() {
@@ -89,5 +64,4 @@
 </script>
 
 <style>
-   
 </style>

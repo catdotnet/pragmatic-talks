@@ -10,7 +10,7 @@
     'Next event': 'Siguiente evento',
     'Last events': 'Últimos eventos',
     'Promoted': 'Promovido',
-    'Stack': 'Stack',
+    'Stack': 'Pila',
     'Top Speakers': 'Ponentes principales',
     'Top Tags': 'Etiquetas principales',
     'Unasigned...': 'Sin asignar...',
@@ -33,6 +33,11 @@
     'Cancel': 'Cancelar',
     'Ok': 'Aceptar',
     'Error': 'Error',
+
+    'Information': 'Información',
+    'When': 'Cuando',
+    'Web': 'Web',
+    'Speakers': 'Ponentes',
 
     'rule01': 'Nadie habla sobre las PRAGMATIC TALKS.',
     'rule02': 'NADIE HABLA sobre las PRAGMATIC TALKS.',

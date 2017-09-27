@@ -13,9 +13,10 @@ module.exports = (env) => {
             alias: {
                 'vue$': 'vue/dist/vue',
                 'components': path.resolve(__dirname, './ClientApp/components'),
-                'views': path.resolve(__dirname, './ClientApp/views'),
-                'utils': path.resolve(__dirname, './ClientApp/utils'),
-                'api': path.resolve(__dirname, './ClientApp/store/api')
+                'plugins': path.resolve(__dirname, './ClientApp/plugins'),
+                'services': path.resolve(__dirname, './ClientApp/services'),
+                'store': path.resolve(__dirname, './ClientApp/store'),
+                'translations': path.resolve(__dirname, './ClientApp/translations'),
             }
         },
         output: {

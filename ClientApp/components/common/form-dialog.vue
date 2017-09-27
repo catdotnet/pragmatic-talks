@@ -1,6 +1,6 @@
 ﻿<template>
     <v-layout row justify-center>
-        <v-dialog v-model="shouldShow" persistent>
+        <v-dialog v-model="shouldShow" persistent width="50%">
             <v-card>
                 <v-card-title>
                     <div class="headline">{{ title }}</div>

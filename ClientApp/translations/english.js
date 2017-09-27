@@ -34,6 +34,11 @@
     'Ok': 'Ok',
     'Error': 'Error',
 
+    'Information': 'Information',
+    'When': 'When',
+    'Web': 'Web',
+    'Speakers': 'Speakers',
+
     'rule01': 'You do not talk about PRAGMATIC TALKS.',
     'rule02': 'You DO NOT talk about PRAGMATIC TALKS.',
     'rule03': 'You can talk in ENGLISH, SPANISH or CATALAN.',

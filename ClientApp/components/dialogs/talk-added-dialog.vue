@@ -42,6 +42,7 @@
         methods: {
             cancel() {
                 this.$emit('close')
+                this.$router.push({ name: 'talks' })
             }
         }
     }

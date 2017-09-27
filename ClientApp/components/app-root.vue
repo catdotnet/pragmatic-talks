@@ -20,7 +20,9 @@
 
         <v-login-dialog :visible="isLogin" @close="showLogin(false)"></v-login-dialog>
 
-        <v-error></v-error>
+        <v-error-dialog></v-error-dialog>
+
+        <v-event-dialog></v-event-dialog>
     </div>
 </template>
 
@@ -33,6 +35,7 @@
     import Toolbar from './layout/toolbar'
     import Login from './dialogs/login-dialog'
     import Error from './dialogs/error-dialog'
+    import Event from './dialogs/event-dialog'
     import service from '../services/me'
     import Vuetify from 'vuetify'
 
@@ -45,7 +48,8 @@
             'v-navigation-pragmatic': Navigation,
             'v-toolbar-pragmatic': Toolbar,
             'v-login-dialog': Login,
-            'v-error': Error,
+            'v-error-dialog': Error,
+            'v-event-dialog': Event
         },
 
         data() {
