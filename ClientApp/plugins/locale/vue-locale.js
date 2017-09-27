@@ -19,6 +19,15 @@ export default {
             }
         })
 
+        Vue.directive('locale-html', {
+            bind(el, binding, vnode) {
+                var locale = vnode.context.$locale
+                var translation = fetch(locale, binding.value || binding.expression)
+                var translated = replace(translation, {})
+                el.innerHTML  = translated
+            }
+        })
+
         Vue.mixin({
             computed: {
                 $locale: {

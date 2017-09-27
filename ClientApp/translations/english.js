@@ -4,6 +4,7 @@
     'Catalan': 'Catalan',
 
     'Talks': 'Talks',
+    'About': 'About',
     'Rules': 'Rules',
     'Events': 'Events',
 
@@ -49,6 +50,13 @@
     'rule08': 'One talk at a time.',
     'rule09': 'One talk has a short title, 3 tags and no description.',
     'rule10': 'OLDER talks have priority over NEWER one.',
-    'rule11': 'Your first talk at PRAGMATIC TALKS, HAS priority over other.'
-    
+    'rule11': 'Your first talk at PRAGMATIC TALKS, HAS priority over other.',
+
+    'Learn, Talk, Share': 'Learn, Talk, Share',
+    'What': 'What',
+    'WhatText': '<p><b>Pragmatic Talks</b>  is an initiative of <a href="http://catdotnet.net" target="_blank"> CatdotNet </a>, an association resulting from the sum of efforts of different groups of .NET users.</p><p> The main ideas are to learn, talk and share. Under this motto we open to all those passionate about software development the possibility to participate actively in this events.</p>',
+    'How': 'How',
+    'HowText': '<p>The operation is simple:<ul><li>Anyone can propose a talk. The only thing we ask is the topic should be about software development.</li><li>The talk will last at most 15 minutes.</li><li>The algorithm behind this web will order the talks and will choose the first 5. New speaker talks take priority.</li><li>An administrator will contact the different speakers to advise them of a free date to set up the event.</li><li>Once everything is confirmed, the event will be organized and announced on this website and also in the meetup account.</li></ul></p>',
+    'Why': 'Why',
+    'WhyText': '<p>We believe that there are many people who have a real passion for software development and want to share and participate in the community. Pragmatic Talks aims to respond to three needs we have found:<ul><li>Let the talks be productive. We offer short talks to give a presentation of a single topic. From there everyone is free to go deeper into it.</li><li>Let everyone have access. Several people have made us know they want to participate in the technical communities. In Pragmatic Talks, you can not only participate, but the system will give them priority.</li><li>Let anyone can share among all his thinks, opinions and experience.</li></ul></p>'
 }

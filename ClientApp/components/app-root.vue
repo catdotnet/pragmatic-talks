@@ -59,7 +59,7 @@
                 title: 'Pragmatic Talks',
                 menuOptions: [
                     { title: 'Talks', to: { name: 'talks' }, icon: 'record_voice_over' },
-                    { title: 'Rules', to: { name: 'rules' }, icon: 'format_list_numbered' },
+                    { title: 'About', to: { name: 'about' }, icon: 'help_outline' },
                     { title: 'Events', to: { name: 'events' }, icon: 'event' },
                 ],
                 languages: [

@@ -4,6 +4,7 @@
     'Catalan': 'Català',
 
     'Talks': 'Xerrades',
+    'About': 'Quant a',
     'Rules': 'Regles',
     'Events': 'Esdeveniments',
 
@@ -32,7 +33,7 @@
     'Use your Twitter account': 'Usa el teu compte de Twitter',
     'Cancel': 'Cancel·la',
     'Ok': "D'acord",
-    'Error': 'Error',
+    'Error': 'Error',
 
     'Information': 'Informació',
     'When': 'Quan',
@@ -45,10 +46,17 @@
     'rule04': 'Pots parlar sobre SOFTWARE, DESENVOLUPAMENT però NO de COBOL.',
     'rule05': 'Una xerrada dura 15 minuts.',
     'rule06': 'Després de 15 minuts, si algú diu "per", la xerrada s\'atura.',
-    'rule07': 'Només 5 xerrades per dia.',
+    'rule07': 'Només 5 xerrades per dia.',
     'rule08': 'Una xerrada a la vegada.',
     'rule09': 'Una xerrada té un títol curt, 3 etiquetes i no té description.',
     'rule10': 'Les xerrades més ANTIGUES tenen prioritat sobre les NOVES.',
-    'rule11': 'La teva primera xerrada a Pragmatic TALKS, TÉ prioritat sobre altres.'
-    
+    'rule11': 'La teva primera xerrada a Pragmatic TALKS, TÉ prioritat sobre altres.',
+
+    'Learn, Talk, Share': 'Aprendre, Xerrar, Compartir',
+    'What': 'Què',
+    'WhatText': '<p> <b> Pragmatic Talks </b> és una iniciativa de <a href="http://catdotnet.net" target="_blank"> CatDotNet </a>, una associació resultat de la suma d\'esforços de diferents grups d\'usuaris de .NET. </p> <p> Les idees principals són aprendre, xerrar i compartir. Sota aquest lema obrim a tots els apassionats pel desenvolupament de programari, i tots els seus vessants, la possibilitat de participar activament en aquesta sèrie d\'esdeveniments periòdics. </p> ',
+    'How': 'Com',
+    'HowText': '<p> El funcionament és simple: <ul> <li> Qualsevol pot proposar una xerrada. L\'única cosa que et demanem és que la temàtica sigui el desenvolupament de programari. </Li> <li> La xerrada durarà com a màxim 15 minuts. </Li> <li> L\'algoritme d\'aquest web ordenarà les xerrades i triarà les 5 primeres . Les xerrades de ponents nous tenen prioritat. </li> <li> Un administrador es posarà en contacte amb els diferents ponents per avisar-los una data lliure per muntar l\'esdeveniment. </li> <li> Un cop tot estigui confirmat s\'organitzarà l\'esdeveniment i s\'anunciarà en aquesta web i en meetup. </li> </ul> </p> ',
+    'Why': 'Per què',
+    'WhyText': '<p> Creiem que hi ha moltes persones que senten veritable passió pel món del desenvolupament i amb ganes de compartir i participar en la comunitat. Pragmatic Talks pretén respondre a tres necessitats que hem trobat: <ul> <li> Que les xerrades siguin productives. Proposem xerrades curtes per poder donar una presentació d\'un sol tema. A partir d\'aquí cadascú és lliure de interioritzar més en ell i així poder generar debat. </Li> <li> Que tothom tingui accés. Diverses persones ens han fet arribar les seves ganes de participar en les comunitats tècniques. En Pragmatic Talks, no només podran participar, sinó que el sistema els donarà prioritat. </Li> <li> Que puguem compartir entre tots els nostres gustos, opinions i experiència. </Li> </ul> </p> '
 }

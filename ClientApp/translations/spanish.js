@@ -4,6 +4,7 @@
     'Catalan': 'Catalán',
 
     'Talks': 'Charlas',
+    'About': 'Acerda de',
     'Rules': 'Reglas',
     'Events': 'Eventos',
 
@@ -49,6 +50,13 @@
     'rule08': 'Una charla a la vez.',
     'rule09': 'Una charla tiene un título corto, 3 etiquetas y no tiene description.',
     'rule10': 'Las charlas más ANTIGUAS tienen prioridad sobre las NUEVAS.',
-    'rule11': 'Tu primera charla en PRAGMATIC TALKS, TIENE prioridad sobre otras.'
-    
+    'rule11': 'Tu primera charla en PRAGMATIC TALKS, TIENE prioridad sobre otras.',
+
+    'Learn, Talk, Share': 'Aprender, Charlar, Compartir',
+    'What': 'Qué',
+    'WhatText': '<p><b>Pragmatic Talks</b> es una iniciativa de <a href="http://catdotnet.net" target="_blank">CatdotNet</a>, una asociación resultado de la suma de esfuerzos de diferentes grupos de usuarios de .NET.</p><p> Las ideas principales son aprender, charlar y compartir. Bajo ese lema abrimos a todos los apasionados por el desarrollo de software, y todas sus vertientes, la posibilidad de participar activamente en esta serie de eventos periodicos.</p>',
+    'How': 'Cómo',
+    'HowText': '<p>El funcionamiento es simple:<ul><li>Cualquiera puede proponer una charla. Lo único que te pedimos es que la temática sea el desarrollo de software.</li><li>La charla durará como máximo 15 minutos.</li><li>El algoritmo de esta web ordenará las charlas y elegirá las 5 primeras. Las charlas de ponentes nuevos tienen prioridad.</li><li>Un administrador se pondrá en contacto con los diferentes ponentes para avisarles de una fecha libre para montar el evento.</li><li>Una vez todo esté confirmado se organizará el evento y se anunciará en esta web y en meetup.</li></ul></p>',
+    'Why': 'Por qué',
+    'WhyText': '<p>Creemos que hay muchas personas que sienten verdadera pasión por el mundo del desarrollo y con ganas de compartir y participar en la comunidad. Pragmatic Talks pretende responder a tres necesidades que hemos encontrado:<ul><li>Que las charlas sean productivas. Proponemos charlas cortas para poder dar una presentación de un solo tema. A partir de ahí cada uno es libre de profundizar más en él.</li><li>Que todo el mundo tenga acceso. Varias personas nos han hecho llegar sus ganas de participar en las comunidades técnicas. En Pragmatic Talks, no solo podrán participar, si no que el sistema les dará prioridad.</li><li>Que podamos compartir entre todos nuestros gustos, opiniones y experiencia.</li></ul></p>'
 }
